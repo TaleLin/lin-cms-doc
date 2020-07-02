@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>模型管理和权限管理 | Lin CMS</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    <link rel="icon" href="/lin-cms-doc/favicon.ico">
+    <meta name="description" content="">
+    <link rel="preload" href="/lin-cms-doc/assets/css/0.styles.52035b25.css" as="style"><link rel="preload" href="/lin-cms-doc/assets/js/app.b2beb96a.js" as="script"><link rel="preload" href="/lin-cms-doc/assets/js/9.23719701.js" as="script"><link rel="preload" href="/lin-cms-doc/assets/js/2.fe66e965.js" as="script"><link rel="preload" href="/lin-cms-doc/assets/js/68.905c69c9.js" as="script"><link rel="preload" href="/lin-cms-doc/assets/js/3.9a7d497e.js" as="script"><link rel="preload" href="/lin-cms-doc/assets/js/6.a8e2af33.js" as="script"><link rel="preload" href="/lin-cms-doc/assets/js/5.198da88e.js" as="script"><link rel="prefetch" href="/lin-cms-doc/assets/js/10.6fb1aeb0.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/100.b738d837.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/101.57c3efc0.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/102.69777161.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/103.52917a3e.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/104.3acdc184.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/105.4d093450.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/11.f1baa907.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/12.19be130a.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/13.143f9033.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/14.7d035331.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/15.5ce7720c.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/16.e2df0918.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/17.860bbaf7.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/18.55e681de.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/19.c78d76d2.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/20.e997c1c1.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/21.63679f01.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/22.bcb7dff2.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/23.70f854ab.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/24.bd719893.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/25.bfc4bdf9.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/26.f27259be.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/27.db0eb085.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/28.32467c26.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/29.46612e80.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/30.f66db636.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/31.d0850997.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/32.e44d5d7b.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/33.6af2f058.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/34.14428be7.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/35.a75fa20d.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/36.359972f6.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/37.8cbbfef6.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/38.609e7d96.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/39.9f0ad144.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/4.a826948f.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/40.72ef1fd4.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/41.1e775f5f.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/42.8ce19c2a.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/43.e6415ccb.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/44.56f6c8f6.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/45.75554a56.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/46.cd611fe4.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/47.492956c8.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/48.f4a6adde.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/49.9f643eeb.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/50.ac201437.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/51.be09d453.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/52.b801599f.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/53.dbfa9134.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/54.e48736ba.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/55.6c768aec.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/56.bb819037.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/57.5ef7199d.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/58.14ae2ac6.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/59.46152a1b.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/60.2b3c32c0.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/61.6f586a92.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/62.e2acdbda.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/63.e924180d.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/64.3298660b.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/65.83ae1628.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/66.b4299945.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/67.ab72fbd5.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/69.96330f13.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/7.b91b8b12.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/70.a5d4755f.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/71.40a884d8.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/72.8041d726.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/73.fa3b2a7c.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/74.c934ad60.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/75.3570b90b.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/76.1201eaa5.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/77.60fa52ee.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/78.44fa9bca.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/79.59908c78.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/8.e5a71a2e.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/80.b1984a41.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/81.02ef45fb.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/82.72f0d9e4.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/83.6fbb3727.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/84.1dad84b0.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/85.f0c72e08.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/86.6e4667c9.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/87.ccbe43ba.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/88.c31f076e.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/89.c3de2c39.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/90.e02f055f.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/91.f3ea8e1b.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/92.c0b981ff.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/93.777334fd.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/94.249799b9.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/95.e51d6333.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/96.4ce6ffb1.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/97.f16c610b.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/98.5f63b17a.js"><link rel="prefetch" href="/lin-cms-doc/assets/js/99.273f2f54.js">
+    <link rel="stylesheet" href="/lin-cms-doc/assets/css/0.styles.52035b25.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/lin-cms-doc/" class="home-link router-link-active"><img src="/lin-cms-doc/left-logo.png" alt="Lin CMS" class="logo"> <span class="site-name can-hide">Lin CMS</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/lin-cms-doc/" class="nav-link">
+  介绍
+</a></div><div class="nav-item"><a href="/lin-cms-doc/imooc/" class="nav-link">
+  慕课课程
+</a></div><div class="nav-item"><a href="/lin-cms-doc/start/" class="nav-link">
+  入门
+</a></div><div class="nav-item"><a href="/lin-cms-doc/server/" class="nav-link router-link-active">
+  后端
+</a></div><div class="nav-item"><a href="/lin-cms-doc/client/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/lin-cms-doc/api/" class="nav-link">
+  API
+</a></div><div class="nav-item"><a href="/lin-cms-doc/plugins/flask/" class="nav-link">
+  插件
+</a></div><div class="nav-item"><a href="/lin-cms-doc/update/" class="nav-link">
+  版本日志
+</a></div><div class="nav-item"><a href="https://course.7yue.pro/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  专栏
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://github.com/TaleLin-cms-vue" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/lin-cms-doc/" class="nav-link">
+  介绍
+</a></div><div class="nav-item"><a href="/lin-cms-doc/imooc/" class="nav-link">
+  慕课课程
+</a></div><div class="nav-item"><a href="/lin-cms-doc/start/" class="nav-link">
+  入门
+</a></div><div class="nav-item"><a href="/lin-cms-doc/server/" class="nav-link router-link-active">
+  后端
+</a></div><div class="nav-item"><a href="/lin-cms-doc/client/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/lin-cms-doc/api/" class="nav-link">
+  API
+</a></div><div class="nav-item"><a href="/lin-cms-doc/plugins/flask/" class="nav-link">
+  插件
+</a></div><div class="nav-item"><a href="/lin-cms-doc/update/" class="nav-link">
+  版本日志
+</a></div><div class="nav-item"><a href="https://course.7yue.pro/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  专栏
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="https://github.com/TaleLin-cms-vue" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>koa</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/lin-cms-doc/server/koa/" aria-current="page" class="sidebar-link">项目结构及开发规范</a></li><li><a href="/lin-cms-doc/server/koa/authority_model.html" aria-current="page" class="active sidebar-link">模型管理和权限管理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/lin-cms-doc/server/koa/authority_model.html#权限管理" class="sidebar-link">权限管理</a></li><li class="sidebar-sub-header"><a href="/lin-cms-doc/server/koa/authority_model.html#模型管理" class="sidebar-link">模型管理</a></li><li class="sidebar-sub-header"><a href="/lin-cms-doc/server/koa/authority_model.html#infocrudmixin" class="sidebar-link">InfoCrudMixin</a></li><li class="sidebar-sub-header"><a href="/lin-cms-doc/server/koa/authority_model.html#小结" class="sidebar-link">小结</a></li></ul></li><li><a href="/lin-cms-doc/server/koa/logger.html" class="sidebar-link">行为日志</a></li><li><a href="/lin-cms-doc/server/koa/config.html" class="sidebar-link">配置</a></li><li><a href="/lin-cms-doc/server/koa/validator.html" class="sidebar-link">校验器</a></li><li><a href="/lin-cms-doc/server/koa/token.html" class="sidebar-link">令牌</a></li><li><a href="/lin-cms-doc/server/koa/file.html" class="sidebar-link">文件上传系统</a></li><li><a href="/lin-cms-doc/server/koa/logging.html" class="sidebar-link">日志系统</a></li><li><a href="/lin-cms-doc/server/koa/unit_test.html" class="sidebar-link">单元测试</a></li><li><a href="/lin-cms-doc/server/koa/questions.html" class="sidebar-link">常见问题</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>flask</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>spring-boot</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="模型管理和权限管理"><a href="#模型管理和权限管理" class="header-anchor">#</a> <div style="display:inline-block;" data-v-2fb52f6a><img src="" alt data-v-2fb52f6a></div> 模型管理和权限管理</h1> <blockquote><p>阅读本小节前，请确保你一定完成了<a href="/lin-cms-doc/start/koa/">快速开始</a>的全部内
+容本小结使用<code>postman</code>作为 http 测试工具，请确保你有 postman 或类似的 http 测试
+工具，它是我们后续开发必不可少的工具。</p></blockquote> <h2 id="权限管理"><a href="#权限管理" class="header-anchor">#</a> 权限管理</h2> <h3 id="架构介绍"><a href="#架构介绍" class="header-anchor">#</a> 架构介绍</h3> <p>Lin 的定位是一整套的 CMS 解决方案。对于任何的 CMS 来说，权限这一块都是<strong>不可或缺</strong>的，
+因此 Lin 在基础框架中便已经集成了权限模块，它是开箱即用的。</p> <p>不过 Lin 的权限模块的概念可能与其它的权限框架由些许不同，当然你完全不用担心，
+因为大部分权限系统的模式都大同小异。</p> <p>在 Lin 的权限模块中，我们有四个模型类来组成这个这个权限模块。如下：</p> <ul><li><p>用户模型(userModel，数据表名称为 lin_user)用户是权限系统服务的基本单位，CMS 与
+一些网站的很大的区别在于，CMS 可能不存在不用登陆便可进入的页面（登陆页除外）。</p></li> <li><p>用户身份模型(userIdentityModel，数据表名称为 lin_user_identity)
+身份模型用于记录用户的登录凭证（比如密码）。</p></li> <li><p>权限组模型(groupModel，数据表名称为 lin_group)权限组是一个非常重要的概念，权限
+组是权限分配的基本单位，同时它也是容纳用户的容器，它是用户与权限之间的纽带。</p> <p>一个用户可以拥有多个权限组，一个权限组也可以拥有多个用户，超级管理员(admin)默认属于
+超级用户组，并且超级管理员拥有所有的权限。</p> <p>权限组也可拥有多个权限，也就是说，在某个权限组的用户拥有该权限组的所有权限。</p></li></ul> <ul><li><p>权限模型(permissionModel，数据表名称为 lin_permission)你可以把一个权限理解成一把钥匙，然你
+拥有这把钥匙的时候你就可以打开某扇门，而当你没有这把钥匙的时候，你就会被锁在门
+的外面。</p> <p>所以对于某个用户，比如说：你，当你拥有某个权限时，你就可以访问某个 API(或多个
+AP)，而当你没有这个权限时，你访问 API 时会得到一个授权失败或禁止的信息。</p></li></ul> <div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>考虑到有可能使用多种登录类型，因此用户登录需要用到 userModel 和 userIdentityModel 两个模型。
+userIdentityModel 用于管理登录类型、登录标识和密码凭证。</p></div> <h3 id="基本使用"><a href="#基本使用" class="header-anchor">#</a> 基本使用</h3> <p>接下来，就让我们开始实战了。请先在<code>app/v1/book.js</code>中添加如下一个删除图书功能的
+API。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 参数 mountPermission 如果设为 false，则不挂载这个模块下的所有权限</span>
+<span class="token keyword">const</span> bookApi <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinRouter</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  prefix<span class="token operator">:</span> <span class="token string">'/v1/book'</span><span class="token punctuation">,</span>
+  module<span class="token operator">:</span> <span class="token string">'图书'</span>  <span class="token comment">// 权限模块，非必选</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+bookApi<span class="token punctuation">.</span><span class="token function">linDelete</span><span class="token punctuation">(</span>
+  <span class="token string">&quot;deleteBook&quot;</span><span class="token punctuation">,</span> <span class="token comment">// 权限的唯一标示</span>
+  <span class="token string">&quot;/:id&quot;</span><span class="token punctuation">,</span>
+  bookApi<span class="token punctuation">.</span><span class="token function">permission</span><span class="token punctuation">(</span><span class="token string">'删除图书'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// 如果不想挂载可以把传入第二个参数 false</span>
+  groupRequired<span class="token punctuation">,</span>
+  <span class="token keyword">async</span> <span class="token parameter">ctx</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> id <span class="token operator">=</span> <span class="token function">getSafeParamId</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">await</span> bookDto<span class="token punctuation">.</span><span class="token function">deleteBook</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      code<span class="token operator">:</span> <span class="token number">14</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>通过上面的 API，在运行程序的时候会向<code>lin_permission</code>这个表中插入<code>name</code>为删除图书，
+<code>module</code>为图书这条权限数据，并且默认是挂载的。</p> <p>在快速开始一节中已经在数据中创建了一个名为<code>root</code>超级管理员的账号，为了更好的测试，我们还需
+要一个普通用户的账号，接下来我们把<code>tests/helper/fake/fake.js</code>的内容更换为如下内容：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token string">'../initial'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> sequelize <span class="token keyword">from</span> <span class="token string">'../../../app/lib/db'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> MountType<span class="token punctuation">,</span> IdentityType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../../app/lib/type'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> generate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'lin-mizar'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> UserModel<span class="token punctuation">,</span> UserIdentityModel <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../../app/model/user'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> GroupModel <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../../app/model/group'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> PermissionModel <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../../app/model/permission'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> GroupPermissionModel <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../../app/model/group-permission'</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 如果创建失败，请确保你的数据库中没有同名的分组和同名的用户
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">run</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 创建权限组</span>
+  <span class="token keyword">const</span> group <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GroupModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  group<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'普通分组'</span><span class="token punctuation">;</span>
+  group<span class="token punctuation">.</span>info <span class="token operator">=</span> <span class="token string">'就是一个分组而已'</span><span class="token punctuation">;</span>
+  <span class="token keyword">await</span> group<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 创建用户</span>
+  <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UserModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  user<span class="token punctuation">.</span>username <span class="token operator">=</span> <span class="token string">'pedro'</span><span class="token punctuation">;</span>
+  <span class="token keyword">await</span> user<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 创建用户密码</span>
+  <span class="token keyword">await</span> UserIdentityModel<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    user_id<span class="token operator">:</span> user<span class="token punctuation">.</span>id<span class="token punctuation">,</span>
+    identity_type<span class="token operator">:</span> IdentityType<span class="token punctuation">.</span>Password<span class="token punctuation">,</span>
+    identifier<span class="token operator">:</span> user<span class="token punctuation">.</span>username<span class="token punctuation">,</span>
+    credential<span class="token operator">:</span> <span class="token function">generate</span><span class="token punctuation">(</span><span class="token string">'123456'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 在运行 app 的时候会获取路由中定义好的权限并插入，这里需要找到 id 来关联权限组</span>
+  <span class="token keyword">const</span> permission <span class="token operator">=</span> <span class="token keyword">await</span> PermissionModel<span class="token punctuation">.</span><span class="token function">findOne</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    where<span class="token operator">:</span> <span class="token punctuation">{</span>
+      name<span class="token operator">:</span> <span class="token string">'删除图书'</span><span class="token punctuation">,</span>
+      module<span class="token operator">:</span> <span class="token string">'图书'</span><span class="token punctuation">,</span>
+      mount<span class="token operator">:</span> MountType<span class="token punctuation">.</span>Mount
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 关联 permission 权限和 group 权限组</span>
+  <span class="token keyword">await</span> GroupPermissionModel<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    group_id<span class="token operator">:</span> group<span class="token punctuation">.</span>id<span class="token punctuation">,</span>
+    permission_id<span class="token operator">:</span> permission<span class="token punctuation">.</span>id
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    sequelize<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>把 <code>test/helper/initial.js</code> 下的 <code>const secure = require('./secure');</code> 更换为
+<code>const secure = require('../../app/config/secure')</code>, 然后在项目根目录下运行
+<code>node test/helper/fake/index</code>执行上述代码。</p> <p>如果你仔细理解了上面架构介绍，这段代码的作用便是创建一个权限(删除图书)，一个用户
+(pedro)，一个权限组(普通分组)；且权限与权限组已经绑定了，不过新建的用户却未与权
+限组关联，这个新建权限就是上段代码中的删除图书的 API。</p> <div class="custom-block warning"><p class="custom-block-title">WARNING</p> <p>这里，虽然新建了<code>pedro</code>这个用户，但是他却没有<em>删除图书</em>这个权限。</p></div> <p>请在 postman 的 url 地址栏输入<code>http://127.0.0.1:5000/cms/user/login</code>，请求方法选
+择 post 方法，并在请求参数的 body 里面填入下面数据：</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;username&quot;</span><span class="token operator">:</span> <span class="token string">&quot;root&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;password&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123456&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>如果顺利，你会得到如下返回结果：</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;access_token&quot;</span><span class="token operator">:</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODQ1MTc1NDEsImlkZW50aXR5IjoxLCJzY29wZSI6ImxpbiIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE1ODQ1MTM5NDF9.G4kEAXX0XAmGHJ0DhpwyGCYDQ1HJ7bwqEq3kBaFSI4A&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;refresh_token&quot;</span><span class="token operator">:</span> <span class="token string">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODcxMDU5NDEsImlkZW50aXR5IjoxLCJzY29wZSI6ImxpbiIsInR5cGUiOiJyZWZyZXNoIiwiaWF0IjoxNTg0NTEzOTQxfQ.6BqbBBByqqF1GNSISOVdS4TrIdrgXE-mmZ-HtD7O3vc&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="imgWrapper" data-v-347678d1><img src="https://consumerminiaclprd01.blob.core.chinacloudapi.cn/miniappbackground/sfgmember/lin/docs/root_login.png" data-v-347678d1></div> <p>到此，我们拿到了访问 API 所必须的令牌，请记住这是超级管理员的令牌，它可以访问一
+切 API。接下来我们访问改变 postman 的 url 地址为</p> <p><code>http://127.0.0.1:5000/cms/admin/permission</code>，并且在请求头中加入键值对。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># 此处的access_token是变量，为上面返回结果的access_token</span>
+Authorization: Bearer <span class="token variable">${access_token}</span>
+</code></pre></div><p>结果为：</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token comment">// 图书模块</span>
+<span class="token property">&quot;图书&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">// 权限</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;删除图书&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;module&quot;</span><span class="token operator">:</span> <span class="token string">&quot;图书&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+<span class="token comment">// 省略... </span>
+</code></pre></div><p>请记住以<code>/admin</code>为前缀的 url 一般为超级管理员专有，需要以超级管理员账号申请令牌
+才可访问。</p> <div class="imgWrapper" data-v-347678d1><img src="https://consumerminiaclprd01.blob.core.chinacloudapi.cn/miniappbackground/sfgmember/lin/docs/permission.png?imageView&amp;thumbnail=2052y1112&amp;type=png&amp;quality=96&amp;stripmeta=0" data-v-347678d1></div> <p>如果你顺利得到了结果，你可能不明白这些数据究竟代表着什么。这没关系，我们会一一说
+明，不过在此之前，你的先了解一个概念，那就是 Lin 中的<strong>endpoint(端点)</strong>。</p> <p>无论你是否熟悉 koa，在这里，一个 endpoint 所能起到的作用那便是——<em>唯一标识一个视
+图函数，或者说一个 url，一个 API(严格来说 API 不等同于一个视图函数，但是在大多数
+的开发中，一个视图函数确实与一个 API 对应)</em>。</p> <p>在视图函数中，第一个参数就是一个<strong>endpoint</strong>，比如上面删除图书的视图函数的
+<strong>endpoint</strong>就是<code>DELETE deleteBook</code>。也就是说，这个端点标识了一个视图函数，
+而<strong>删除图书</strong>代表的是这个权限的名称。聪明的你会发现，一个权限可以拥有多个端点，
+换言之那就是一个权限可以对应多个视图函数。当然一般情况下，一个权限对应一个视图函数，
+我们也强烈推荐你这么做。</p> <p><strong>删除图书</strong>这个权限它还有一个重要的属性，那就是模块(module)，也就是<strong>图书</strong>这个
+字段。</p> <p>之所以需要这个属性，是因为权限一旦多了之后，你可能无法很好的梳理它们之间的关联，
+而有了模块这个概念之后，你可以很好的区分哪些权限属于哪一个模块，在前端操作界面，
+当管理员进行操作的时候，这也会为他提供诸多便利。</p> <div class="custom-block warning"><p class="custom-block-title">WARNING</p> <p>开发者请注意，此处的<strong>删除图书</strong>权限和<strong>图书</strong>模块对应的是上述添加视图函数中的</p> <div class="language-js extra-class"><pre class="language-js"><code>bookApi<span class="token punctuation">.</span><span class="token function">linDelete</span><span class="token punctuation">(</span>
+  <span class="token string">&quot;deleteBook&quot;</span><span class="token punctuation">,</span> <span class="token comment">// 权限的唯一标识</span>
+  <span class="token string">&quot;/:id&quot;</span><span class="token punctuation">,</span>
+  bookApi<span class="token punctuation">.</span><span class="token function">permission</span><span class="token punctuation">(</span><span class="token string">'删除图书'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  groupRequired<span class="token punctuation">,</span>
+  <span class="token keyword">async</span> <span class="token parameter">ctx</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> id <span class="token operator">=</span> <span class="token function">getSafeParamId</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">await</span> bookDto<span class="token punctuation">.</span><span class="token function">deleteBook</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      code<span class="token operator">:</span> <span class="token number">14</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>权限的命名和分配均是由开发者自己来斟酌，如果你们是团队协作，请与你们的前端、客户
+仔细交流再做决定。</p></div> <p>上面，我们添加了一个<code>deleteBook</code>的 API，其对应的 url
+为<code>http://127.0.0.1:5000/v1/book/1</code>，请求方法为<code>delete</code>。如果此时，你以超级管理
+员的 token 进行操作，那么毫无疑问，这个 id 为 1 的图书会被删除。但是绝大多数情况
+下，我们不能让别人直接以超级管理员的身份来操作，这太危险了！！！</p> <p>聪明的你又会发现，我们刚刚不是已经申请了一个名为<code>pedro</code>的用户吗？而且他还未被分
+配到任何权限组(请注意，我们非常不推荐存在离群用户，即没有被分配到权限组的用户，
+超级管理员除外，此处我们仅仅是为了方便测试而未直接给 pedro 用户分配权限组)，因此
+理论上说 pedro 并没有访问<code>deleteBook</code>的权限，那么实际如何了。</p> <p>我们通过 pedro 的账号名、密码登陆获取令牌，并将 header 中的 Authorization 字段换
+成相应的令牌字段。而后访问<code>http://127.0.0.1:5000/v1/book/1</code>，你会得到如下结果：</p> <div class="imgWrapper" data-v-347678d1><img src="https://consumerminiaclprd01.blob.core.chinacloudapi.cn/miniappbackground/sfgmember/lin/docs/delete_book_forbidden.png" data-v-347678d1></div> <p>现在权限系统已经开始显现它的威能了。它告诉我们，pedro 这个用户未被分配权限组，并
+没有权限能够访问这个 API。既然没有权限，那我们便分配这个权限给 pedro(请注意，这
+里分配权限仅为了测试方便，一般的只允许超级管理员分配)。</p> <p>打开<code>tests/helper/fake/fake.js</code>文件，换成如下代码：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token string">'../initial'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> sequelize <span class="token keyword">from</span> <span class="token string">'../../../app/libs/db'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> UserModel <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../../app/models/user'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> GroupModel <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../../app/models/group'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> UserGroupModel <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../../app/models/user-group'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">run</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 查找需要关联的权限组 id</span>
+  <span class="token keyword">const</span> group <span class="token operator">=</span> <span class="token keyword">await</span> GroupModel<span class="token punctuation">.</span><span class="token function">findOne</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    where<span class="token operator">:</span> <span class="token punctuation">{</span>
+      name<span class="token operator">:</span> <span class="token string">'普通分组'</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 查找 pedro 用户的 id 用去关联权限组</span>
+  <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword">await</span> UserModel<span class="token punctuation">.</span><span class="token function">findOne</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    where<span class="token operator">:</span> <span class="token punctuation">{</span>
+      username<span class="token operator">:</span> <span class="token string">'pedro'</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 关联用户和权限组</span>
+  <span class="token keyword">await</span> UserGroupModel<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    user_id<span class="token operator">:</span> user<span class="token punctuation">.</span>id<span class="token punctuation">,</span>
+    group_id<span class="token operator">:</span> group<span class="token punctuation">.</span>id
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    sequelize<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>运行它后，pedro 用户便被分配到了 id 为 1(理论上为 1，可能为其它值) 的这个权限组
+。接下来，我们再次访问<code>http://127.0.0.1:5000/v1/book/1</code>，结果如下：</p> <div class="imgWrapper" data-v-347678d1><img src="https://consumerminiaclprd01.blob.core.chinacloudapi.cn/miniappbackground/sfgmember/lin/docs/delete_book_success.png" data-v-347678d1></div> <p>如果你也是一样的结果，那么恭喜你，你已经完成了一个权限开发的全部流程，再你后续的
+开发过程中，都是类似的做法来完成全部的权限管理开发。</p> <h3 id="守卫函数"><a href="#守卫函数" class="header-anchor">#</a> 守卫函数</h3> <p>在上一节中，你一定注意到了一个名为<code>groupRequired</code>的中间件。我们把这它称之为<strong>守
+卫函数</strong>。他们都分布在<code>app/middleware/jwt.js</code>文件下，请记住，守卫函数是权限系统中非常重要的一环，在基础库中我们提供了 3 个
+守卫函数，分别是：</p> <table><thead><tr><th>name</th> <th style="text-align:left;">说明</th> <th style="text-align:left;">作用</th></tr></thead> <tbody><tr><td>loginRequired</td> <td style="text-align:left;">被 loginRequired 装饰的视图函数需登陆后才可访问</td> <td style="text-align:left;"><strong>**</strong></td></tr> <tr><td>groupRequired</td> <td style="text-align:left;">被 groupRequired 装饰的视图函数需登陆且被授予相应的权限后才可访问</td> <td style="text-align:left;"><strong>**</strong></td></tr> <tr><td>adminRequired</td> <td style="text-align:left;">被 adminRequired 装饰的视图函数只有超级管理员才可访问</td> <td style="text-align:left;"><strong>**</strong></td></tr></tbody></table> <p>开发者请注意，这三个守卫函数是开发层面上权限管理。如果你的视图函数未加任何守卫函
+数修饰，那么它可以被任何人访问，这样的视图函数一般是登陆这些功能的视图函数。又如
+哪些视图函数需要用户登陆才能访问，如用户修改密码，那么它可以加
+上<code>loginRequired</code>这个守卫函数。如果有些视图函数的功能需要授予权限才能访问，请使
+用<code>groupRequired</code>。而有些视图函数非超级管理员不可操作，那么请加
+上<code>adminRequired</code>修饰。</p> <h2 id="模型管理"><a href="#模型管理" class="header-anchor">#</a> 模型管理</h2> <p>在权限管理的架构介绍时，我们就已经介绍了四个模型
+类<code>userModel</code>、<code>userIdentityModel</code>、<code>groupModel</code>和<code>permissionModel</code>。这是 Lin 里面最重要的四个模型，Lin 默
+认暴露的 API 和权限系统均直接依赖于这四个模型类。所有模型都定义在<code>app/models</code>目录下，
+如果需要对模型进行扩展只需要根据需要修改即可。</p> <p>由于 sequelize 的特性，当你修改了数据库中的某张表时时，它并不会直接更新这张表。
+所以为了确保扩展成功，请你在数据库中先删除掉这张表，然后再次运行<code>npm run start:dev</code>。</p> <h2 id="infocrudmixin"><a href="#infocrudmixin" class="header-anchor">#</a> InfoCrudMixin</h2> <p>Lin 默认集成了 sequelize 这个方便的 ORM 库，因此我们可以很好的根据模型(model) 来
+进行相关的数据库操作。某种意义上，sequelize 提供的 API 已经可以很好的操作数据库
+了。</p> <p>sequelize 在模型定义时，提供了<code>createdAt</code>，<code>updatedAt</code>,<code>deletedAt</code>这三个选项，方
+便进行数据的软删除和观测。</p> <p>为了保持与其他版本的一致性，InfoCrudMixin 在基础模型上改变
+了<code>createdAt</code>，<code>updatedAt</code>,<code>deletedAt</code>这三个字段名。其分别被改
+为<code>create_time</code>，<code>update_time</code>，<code>delete_time</code>这三个字段。</p> <p>并且 InfoCrudMixin 提供了 create_time 的 get 方法，会把 Date 类型的 create_time
+改变为 unix 时间戳。</p> <h2 id="小结"><a href="#小结" class="header-anchor">#</a> 小结</h2> <p>在本节中，我们熟悉了一下权限管理的开发流程，并介绍了模型的管理和扩展。</p> <p>如果你对模型类的操作还不够了解，甚至有些疑惑，请你详细阅
+读<a href="http://docs.sequelizejs.com/" target="_blank" rel="noopener noreferrer">sequelize<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>的官方文档。</p> <div data-v-244f5c7a><ul class="rightMenuWrapper" data-v-244f5c7a></ul></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">7/2/2020, 9:14:26 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/lin-cms-doc/server/koa/" class="prev router-link-active">
+        项目结构及开发规范
+      </a></span> <span class="next"><a href="/lin-cms-doc/server/koa/logger.html">
+        行为日志
+      </a>
+      →
+    </span></p></div> <img src="/lin-cms-doc/assets/img/bottom-logo.385a53c5.png" style="position:absolute;width:135px;left:calc(100% / 2 + 50px);transform:translateX(-50%);"></main></div><div class="global-ui"></div></div>
+    <script src="/lin-cms-doc/assets/js/app.b2beb96a.js" defer></script><script src="/lin-cms-doc/assets/js/9.23719701.js" defer></script><script src="/lin-cms-doc/assets/js/2.fe66e965.js" defer></script><script src="/lin-cms-doc/assets/js/68.905c69c9.js" defer></script><script src="/lin-cms-doc/assets/js/3.9a7d497e.js" defer></script><script src="/lin-cms-doc/assets/js/6.a8e2af33.js" defer></script><script src="/lin-cms-doc/assets/js/5.198da88e.js" defer></script>
+  </body>
+</html>
