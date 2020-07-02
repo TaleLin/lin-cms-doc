@@ -1,81 +1,24 @@
+const highlight = require('./public/js/highlight')
+
 module.exports = {
-  dest: 'lin',
+  title:'Lin CMS',
+  evergreen: false,
+  host: 'localhost',
+  port: 3000,
   base:'/',
-  locales: {
-    '/': {
-      keywords: 'lin cms,lin-cms, 林间有风, LIN',
-      description:
-        'Lin-CMS 是林间有风团队经过大量项目实践所提炼出的一套内容管理系统框架。Lin-CMS 可以有效的帮助开发者提高 CMS 的开发效率。'
-    }
-  },
-  head: [
-    [
-      'link',
-      {
-        rel: 'icon',
-        href: `/logo.png`
-      }
-    ],
-    [
-      'link',
-      {
-        rel: 'manifest',
-        href: '/manifest.json'
-      }
-    ],
-    [
-      'meta',
-      {
-        name: 'theme-color',
-        content: '#3eaf7c'
-      }
-    ],
-    [
-      'meta',
-      {
-        name: 'apple-mobile-web-app-capable',
-        content: 'yes'
-      }
-    ],
-    [
-      'meta',
-      {
-        name: 'apple-mobile-web-app-status-bar-style',
-        content: 'black'
-      }
-    ],
-    [
-      'link',
-      {
-        rel: 'apple-touch-icon',
-        href: `/icons/apple-touch-icon-152x152.png`
-      }
-    ],
-    [
-      'link',
-      {
-        rel: 'mask-icon',
-        href: '/icons/safari-pinned-tab.svg',
-        color: '#3eaf7c'
-      }
-    ],
-    [
-      'meta',
-      {
-        name: 'msapplication-TileImage',
-        content: '/icons/msapplication-icon-144x144.png'
-      }
-    ],
-    [
-      'meta',
-      {
-        name: 'msapplication-TileColor',
-        content: '#000000'
-      }
-    ]
+  dest:'./dist',
+  head:[
+    ['link',{
+      rel:'icon',
+      href:'/favicon.ico'
+    }]
   ],
-  serviceWorker: true,
-  theme: '',
+  chainMarkdown (config) {
+    config
+      .options
+      .highlight(highlight)
+      .end()
+  },
   themeConfig: {
     repo: '',
     logo: '/left-logo.png',
@@ -91,31 +34,31 @@ module.exports = {
           },
           {
             text: '慕课课程',
-            link: '/lin/imooc/'
+            link: '/imooc/'
           },
           {
             text: '入门',
-            link: '/lin/start/'
+            link: '/start/'
           },
           {
             text: '后端',
-            link: '/lin/server/'
+            link: '/server/'
           },
           {
             text: '前端',
-            link: '/lin/client/'
+            link: '/client/'
           },
           {
             text: 'API',
-            link: '/lin/api/'
+            link: '/api/'
           },
           {
             text: '插件',
-            link: '/lin/plugins/flask/'
+            link: '/plugins/flask/'
           },
           {
             text: '版本日志',
-            link: '/lin/update/'
+            link: '/update/'
           },
           {
             text: '专栏',
@@ -123,11 +66,11 @@ module.exports = {
           },
           {
             text: 'GitHub',
-            link: 'https://github.com/TaleLin/lin-cms-vue'
+            link: 'https://github.com/TaleLin-cms-vue'
           }
           // {
           //   text: '内部资料',
-          //   link: '/lin/inside/'
+          //   link: '/inside/'
           // },
           // {
           //   text: '文档规范',
@@ -135,17 +78,17 @@ module.exports = {
           // }
         ],
         sidebar: {
-          '/lin/introduce/': [
+          '/introduce/': [
             {
               title: '指南',
-              children: ['/lin/introduce/', 'imooc', 'update']
+              children: ['/introduce/', 'imooc', 'update']
             }
           ],
-          '/lin/start/': [
+          '/start/': [
             {
               title: 'koa入门',
               children: [
-                '/lin/start/koa/',
+                '/start/koa/',
                 'koa/vue-client',
                 'koa/backend-demo',
                 'koa/frontend-demo'
@@ -154,7 +97,7 @@ module.exports = {
             {
               title: 'flask入门',
               children: [
-                '/lin/start/flask/',
+                '/start/flask/',
                 'flask/vue-client',
                 'flask/backend-demo',
                 'flask/frontend-demo'
@@ -163,18 +106,18 @@ module.exports = {
             {
               title: 'spring-boot入门',
               children: [
-                '/lin/start/spring-boot/',
+                '/start/spring-boot/',
                 'spring-boot/vue-client',
                 'spring-boot/backend-demo',
                 'spring-boot/frontend-demo'
               ]
             }
           ],
-          '/lin/server/': [
+          '/server/': [
             {
               title: 'koa',
               children: [
-                '/lin/server/koa/',
+                '/server/koa/',
                 'koa/authority_model',
                 'koa/logger',
                 'koa/config',
@@ -189,7 +132,7 @@ module.exports = {
             {
               title: 'flask',
               children: [
-                '/lin/server/flask/',
+                '/server/flask/',
                 'flask/run_process',
                 'flask/authority_and_models',
                 'flask/logger_and_notify',
@@ -205,7 +148,7 @@ module.exports = {
             {
               title: 'spring-boot',
               children: [
-                '/lin/server/spring-boot/',
+                '/server/spring-boot/',
                 'spring-boot/permission',
                 'spring-boot/logger',
                 'spring-boot/file',
@@ -218,11 +161,11 @@ module.exports = {
               ]
             }
           ],
-          '/lin/client/': [
+          '/client/': [
             {
               title: '前端核心',
               children: [
-                '/lin/client/',
+                '/client/',
                 'catalog',
                 'router',
                 'authority',
@@ -234,7 +177,7 @@ module.exports = {
             {
               title: '前端组件库',
               children: [
-                '/lin/client/components/',
+                '/client/components/',
                 // 'components/table',
                 // 'components/button',
                 'components/icon',
@@ -246,11 +189,11 @@ module.exports = {
               ]
             }
           ],
-          '/lin/plugins/': [
+          '/plugins/': [
             {
               title: '插件koa版',
               children: [
-                '/lin/plugins/koa/'
+                '/plugins/koa/'
                 // 'koa/start',
                 // 'koa/fe_develop',
                 // 'koa/be_develop',
@@ -260,7 +203,7 @@ module.exports = {
             {
               title: '插件flask版',
               children: [
-                '/lin/plugins/flask/',
+                '/plugins/flask/',
                 'flask/start',
                 'flask/fe_develop',
                 'flask/be_develop',
@@ -268,20 +211,20 @@ module.exports = {
               ]
             }
           ],
-          '/lin/update/': [
+          '/update/': [
             {
               title: '版本日志',
-              children: ['/lin/update/', 'flask', 'spring-boot', 'frontend']
+              children: ['/update/', 'flask', 'spring-boot', 'frontend']
             }
           ]
-          // '/lin/guide/': [{
+          // '/guide/': [{
           //   title: '指南（不完整，仅参考）',
-          //   children: ['/lin/guide/', 'structure', 'best-practice']
+          //   children: ['/guide/', 'structure', 'best-practice']
           // }],
-          // '/lin/inside/': [{
+          // '/inside/': [{
           //   title: '内部',
           //   children: [
-          //     '/lin/inside/',
+          //     '/inside/',
           //     'api',
           //     'jwt',
           //     'md_style',
