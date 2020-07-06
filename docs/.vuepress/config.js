@@ -20,11 +20,12 @@ module.exports = {
       .end()
   },
   themeConfig: {
-    repo: '',
-    logo: '/left-logo.png',
-    editLinks: false,
-    lastUpdated: '上次更新',
     docsDir: 'docs',
+    editLinks: true,
+    editLinkText: '纠正错误',
+    repo: "TaleLin/lin-cms-doc",
+    logo: '/left-logo.png',
+    lastUpdated: '上次更新',
     locales: {
       '/': {
         nav: [
