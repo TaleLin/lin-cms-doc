@@ -22,6 +22,7 @@ module.exports = {
   themeConfig: {
     docsDir: 'docs',
     editLinks: true,
+    smoothScroll: true,
     editLinkText: '纠正错误',
     repo: "TaleLin/lin-cms-doc",
     logo: '/left-logo.png',
