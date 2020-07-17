@@ -73,7 +73,7 @@ module.exports = {
           },
           {
             text: '专栏',
-            link: 'https://course.7yue.pro/'
+            link: 'https://course.talelin.com'
           }
           // {
           //   text: '内部资料',
