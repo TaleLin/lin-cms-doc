@@ -5,7 +5,7 @@ module.exports = {
   evergreen: false,
   host: 'localhost',
   port: 3000,
-  base:'/',
+  base:'/lin-cms-doc/',
   dest:'./dist',
   head:[
     ['link',{
@@ -32,7 +32,8 @@ module.exports = {
     editLinks: true,
     smoothScroll: true,
     editLinkText: '纠正错误',
-    repo: "TaleLin/lin-cms-doc",
+    repo: "TaleLin/lin-cms",
+    docsRepo: "TaleLin/lin-cms-doc",
     logo: '/left-logo.png',
     lastUpdated: '上次更新',
     locales: {
@@ -73,10 +74,6 @@ module.exports = {
           {
             text: '专栏',
             link: 'https://course.7yue.pro/'
-          },
-          {
-            text: 'GitHub',
-            link: 'https://github.com/TaleLin-cms-vue'
           }
           // {
           //   text: '内部资料',
