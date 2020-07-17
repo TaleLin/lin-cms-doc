@@ -32,7 +32,7 @@ module.exports = {
     editLinks: true,
     smoothScroll: true,
     editLinkText: '纠正错误',
-    repo: "TaleLin/lin-cms",
+    repo: "TaleLin/lin-cms-vue",
     docsRepo: "TaleLin/lin-cms-doc",
     logo: '/left-logo.png',
     lastUpdated: '上次更新',
