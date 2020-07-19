@@ -95,7 +95,7 @@ React Or Angular，那么加入我们，为 Lin 开发一个对应的版本吧�
   </p>
 
   <p class="action">
-    <a href="/lin/start/spring-boot/" class="action-button">spring-boot快速开始 →</a>
+    <a href="/start/spring-boot/" class="action-button">spring-boot快速开始 →</a>
   </p>
 </div>
 
