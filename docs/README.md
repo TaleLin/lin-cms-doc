@@ -82,16 +82,16 @@ Lin 的服务端框架是基于 Python Flask 的，所以如果你比较熟悉 F
 React Or Angular，那么加入我们，为 Lin 开发一个对应的版本吧。
 
 
-**想要深入了解这些项目的实现原理？请[前往](./lin/imooc/)**
+**想要深入了解这些项目的实现原理？请[前往](./imooc/)**
 
 <div class="row">
 
   <p class="action">
-    <a href="/lin/start/koa/" class="action-button">koa快速开始 →</a>
+    <a href="/start/koa/" class="action-button">koa快速开始 →</a>
   </p>
 
   <p class="action">
-    <a href="/lin/start/flask/" class="action-button">flask快速开始 →</a>
+    <a href="/start/flask/" class="action-button">flask快速开始 →</a>
   </p>
 
   <p class="action">
