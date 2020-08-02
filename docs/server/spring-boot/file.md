@@ -120,7 +120,27 @@ lin.cms.file.uploader=qiniuyun
 你必须从你的七牛云账号获得，然后将其准确的填写入配置。
 
 另外，我们还需要修改两个配置，一个是文件服务器域名（七牛云配置中的域名），另一个是
-uploader 的实现，我们将其修改为了 qiniuyun。
+uploader 的实现，将`LocalUploader`修改为`QiniuUploader`。
+
+```java
+// io.github.talelin.latticy.extension.file.UploaderConfiguration
+
+@Configuration
+public class UploaderConfiguration {
+    /**
+     * @return 本地文件上传实现类
+     */
+    @Bean
+    @Order
+    @ConditionalOnMissingBean
+    public Uploader uploader(){
+        // return new LocalUploader();
+        return new QiniuUploader();
+    }
+}
+```
+
+
 
 配置修改完毕后，文件上传就可以无缝切换到云上了。
 
