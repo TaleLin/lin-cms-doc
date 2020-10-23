@@ -198,7 +198,7 @@ export default {
 
 |  方法名  | 参数 |                     说明                     |
 | :------: | :--: | :------------------------------------------: |
-| vm.$connect(path) |  path  | 连接webSokect,path格式前缀需为`//`，由此来根据网站采取`http`还是`https` eg: `//face.cms.7yue.pro/`|
+| vm.$connect(path) |  path  | 连接webSokect,path格式前缀需为`//`，由此来根据网站采取`http`还是`https` eg: `//face.cms.talelin.com/`|
 |  vm.$disconnect()   |  -  |               断开webSokect               |
 |  vm.$socket.send('some data')   |  -  |     webSokect推送消息      |
 |  vm.$socket.sendObj({awesome: 'data'})   |  -  |     webSokect推送消息（配置为`{format: 'json'}`）    |

@@ -1,6 +1,6 @@
 # 画廊 Gallery
 
-仿照小程序图片预览api, [演示效果](http://face.cms.7yue.pro/#/custom/gallery)
+仿照小程序图片预览api, [演示效果](http://face.cms.talelin.com/#/custom/gallery)
 
 - 挂载到 Vue 实例，开箱即用
 - 封装 photoswipe ，可拓展高级应用
