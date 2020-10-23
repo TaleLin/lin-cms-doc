@@ -1032,11 +1032,11 @@ export default {
 </template>
 </BorderContent>
 
-数据的导出效果，请移步demo地址：[http://face.cms.7yue.pro/#/table](http://face.cms.7yue.pro/#/table)
+数据的导出效果，请移步demo地址：[http://face.cms.talelin.com/#/table](http://face.cms.talelin.com/#/table)
 
 ## 自定义列模板
 
-关于自定义模版的使用，如行内编辑、单元格编辑、定制列、数据导出、拖拽等使用方法，请参考demo地址：[http://face.cms.7yue.pro/#/table](http://face.cms.7yue.pro/#/table)
+关于自定义模版的使用，如行内编辑、单元格编辑、定制列、数据导出、拖拽等使用方法，请参考demo地址：[http://face.cms.talelin.com/#/table](http://face.cms.talelin.com/#/table)
 
 <!-- ## 行内编辑
 

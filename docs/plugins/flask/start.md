@@ -6,7 +6,7 @@ title: 快速上手
 
 # <H2Icon /> 快速上手
 
-本小节，我们将以[诗词展示插件](http://face.cms.7yue.pro/#/poems)为例, 让你体验插件的基本使用。
+本小节，我们将以[诗词展示插件](http://face.cms.talelin.com/#/poems)为例, 让你体验插件的基本使用。
 在开始之前， 我们默认你已会使用 Lin CMS 进行基本开发。若你是首次接触 Lin-CMS，请阅读[后端入门](../start/README.md)和[前端入门](../start/vue-client.md)。
 
 诗词展示插件说明： 本插件功能是从服务端API获取古诗词数据，并展示在 Lin-CMS 舞台上。属于 AB 型插件。

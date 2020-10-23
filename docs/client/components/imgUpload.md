@@ -1,6 +1,6 @@
 # 多图上传
 
-多图片上传组件 `UploadImgs`, 附有预览, 排序, 验证等功能 [演示效果](http://face.cms.7yue.pro/#/imgs-upload/stage1)
+多图片上传组件 `UploadImgs`, 附有预览, 排序, 验证等功能 [演示效果](http://face.cms.talelin.com/#/imgs-upload/stage1)
 
 - 开箱即用
 - 支持固定上传数量图片上传和不定数量图片上传
@@ -56,12 +56,12 @@ export default {
 ```js
 const initData = [{
   id: '12d3',
-  display: 'http://img-home.7yue.pro/images/index/Lin_cms_%E5%B0%81%E9%9D%A2.png',
+  display: 'http://img-home.talelin.com/images/index/Lin_cms_%E5%B0%81%E9%9D%A2.png',
   src: '/images/index/Lin_cms_%E5%B0%81%E9%9D%A2.png',
   imgId: '238287',
 }, {
   id: '17qr',
-  display: 'http://img-home.7yue.pro/images/index/Lin_UI_%E5%B0%81%E9%9D%A2.png',
+  display: 'http://img-home.talelin.com/images/index/Lin_UI_%E5%B0%81%E9%9D%A2.png',
   src: '/images/index/Lin_UI_%E5%B0%81%E9%9D%A2.png',
   imgId: '1232323',
 }];

@@ -1,6 +1,6 @@
 # 富文本
 
-二次封装富文本-Tinymce, [演示效果](http://face.cms.7yue.pro/#/custom/tinymce)
+二次封装富文本-Tinymce, [演示效果](http://face.cms.talelin.com/#/custom/tinymce)
 
 - 开箱即用
 - 支持富文本效果实时预览
@@ -10,7 +10,7 @@
 - 支持部分markdown语法
 
 ::: tip
-如果使用插入图片功能，需配合后端[文件上传接口](http://doc.cms.7yue.pro/lin/server/koa/file.html)使用;图片上传成功后，会以该图片完整的url地址的形式插入到富文本内容当中。
+如果使用插入图片功能，需配合后端[文件上传接口](http://doc.cms.talelin.com/lin/server/koa/file.html)使用;图片上传成功后，会以该图片完整的url地址的形式插入到富文本内容当中。
 :::
 
 ## 基础示例

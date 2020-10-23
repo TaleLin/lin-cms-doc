@@ -6,52 +6,52 @@ Lin 对 [element](https://element.eleme.io/#/zh-CN/component/button) 里一些�
 
 ## Button 按钮
 
-演示效果：[http://face.cms.7yue.pro/#/lin-cms-ui/basic/button](http://face.cms.7yue.pro/#/lin-cms-ui/basic/button)
+演示效果：[http://face.cms.talelin.com/#/lin-cms-ui/basic/button](http://face.cms.talelin.com/#/lin-cms-ui/basic/button)
 
 ## Switch 开关
 
-演示效果：[http://face.cms.7yue.pro/#/lin-cms-ui/form/switch](http://face.cms.7yue.pro/#/lin-cms-ui/form/switch)
+演示效果：[http://face.cms.talelin.com/#/lin-cms-ui/form/switch](http://face.cms.talelin.com/#/lin-cms-ui/form/switch)
 
 ## Rate 评分
 
-演示效果：[http://face.cms.7yue.pro/#/lin-cms-ui/form/rate](http://face.cms.7yue.pro/#/lin-cms-ui/form/rate)
+演示效果：[http://face.cms.talelin.com/#/lin-cms-ui/form/rate](http://face.cms.talelin.com/#/lin-cms-ui/form/rate)
 
 ## Tabs 标签页
 
-演示效果：[http://face.cms.7yue.pro/#/lin-cms-ui/navigation/tab](http://face.cms.7yue.pro/#/lin-cms-ui/navigation/tab)
+演示效果：[http://face.cms.talelin.com/#/lin-cms-ui/navigation/tab](http://face.cms.talelin.com/#/lin-cms-ui/navigation/tab)
 
 ## Table 表格
 
-演示效果：[http://face.cms.7yue.pro/#/lin-cms-ui/table/combo](http://face.cms.7yue.pro/#/lin-cms-ui/table/combo)
+演示效果：[http://face.cms.talelin.com/#/lin-cms-ui/table/combo](http://face.cms.talelin.com/#/lin-cms-ui/table/combo)
 
 ## Input 输入框
 
-演示效果：[http://face.cms.7yue.pro/#/lin-cms-ui/form/input](http://face.cms.7yue.pro/#/lin-cms-ui/form/input)
+演示效果：[http://face.cms.talelin.com/#/lin-cms-ui/form/input](http://face.cms.talelin.com/#/lin-cms-ui/form/input)
 
 ## Radio 单选框
 
-演示效果：[http://face.cms.7yue.pro/#/lin-cms-ui/form/radio](http://face.cms.7yue.pro/#/lin-cms-ui/form/radio)
+演示效果：[http://face.cms.talelin.com/#/lin-cms-ui/form/radio](http://face.cms.talelin.com/#/lin-cms-ui/form/radio)
 
 ## CheckBox 复选框
 
-演示效果：[http://face.cms.7yue.pro/#/lin-cms-ui/form/checkbox](http://face.cms.7yue.pro/#/lin-cms-ui/form/checkbox)
+演示效果：[http://face.cms.talelin.com/#/lin-cms-ui/form/checkbox](http://face.cms.talelin.com/#/lin-cms-ui/form/checkbox)
 
 ## Select 选择器
 
-演示效果：[http://face.cms.7yue.pro/#/lin-cms-ui/form/select](http://face.cms.7yue.pro/#/lin-cms-ui/form/select)
+演示效果：[http://face.cms.talelin.com/#/lin-cms-ui/form/select](http://face.cms.talelin.com/#/lin-cms-ui/form/select)
 
 ## Breadcrumb 面包屑
 
-演示效果： [http://face.cms.7yue.pro/#/lin-cms-ui/navigation/breadcrumb](http://face.cms.7yue.pro/#/lin-cms-ui/navigation/breadcrumb)
+演示效果： [http://face.cms.talelin.com/#/lin-cms-ui/navigation/breadcrumb](http://face.cms.talelin.com/#/lin-cms-ui/navigation/breadcrumb)
 
 ## Tag 标签
 
-演示效果：[http://face.cms.7yue.pro/#/lin-cms-ui/data/tag](http://face.cms.7yue.pro/#/lin-cms-ui/data/tag)
+演示效果：[http://face.cms.talelin.com/#/lin-cms-ui/data/tag](http://face.cms.talelin.com/#/lin-cms-ui/data/tag)
 
 ## Badge 标记
 
-演示效果：[http://face.cms.7yue.pro/#/lin-cms-ui/data/badge](http://face.cms.7yue.pro/#/lin-cms-ui/data/badge)
+演示效果：[http://face.cms.talelin.com/#/lin-cms-ui/data/badge](http://face.cms.talelin.com/#/lin-cms-ui/data/badge)
 
 ## Dialog 对话框
 
-演示效果：[http://face.cms.7yue.pro/#/lin-cms-ui/other/dialog](http://face.cms.7yue.pro/#/lin-cms-ui/other/dialog)
+演示效果：[http://face.cms.talelin.com/#/lin-cms-ui/other/dialog](http://face.cms.talelin.com/#/lin-cms-ui/other/dialog)
