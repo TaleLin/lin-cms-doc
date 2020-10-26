@@ -161,14 +161,14 @@ wtforms 上的一致性。规定一下的参数情况可以被定义为**无**�
 当定义一个 Rule 为`isOptional`时，可以给该 Rule 传入第三个参数，默认值。如：
 
 ```js
-new Rule("isOptional", "", "pedrogao1996@gmail.com"),
+new Rule("isOptional", "", "test@gmail.com"),
 ```
 
-这段代码中的 `10` 就是默认值，请记住默认值是`isOptional`所独有的（目前来说）。
+这段代码中的 `test@gmail.com` 就是默认值，请记住默认值是`isOptional`所独有的（目前来说）。
 
 当`isOptional`Rule 被赋有默认值时，这个字段就会发生变化。以`email`为例，当前端没
 有传入这个参数时，校验器中的`email`数据肯定是一个`undefined`。但是因为默认值的存
-在，这个`email`会被赋予默认值，即`pedrogao1996@gmail.com`。
+在，这个`email`会被赋予默认值，即`test@gmail.com`。
 
 <!-- validateFunc 是一个很灵活的参数。它可以为 String 也可以为 Function。当
 validateFunc 为 String 时，validator 会自动根据字符串的内容在 `validator.js` 中
