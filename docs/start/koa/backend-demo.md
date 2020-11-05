@@ -148,11 +148,11 @@ ctx.body 进行赋值时，尤其是使 body 等于某个模型时，koa 会对�
 :::
 
 有了该模型后，修改 test/helper/initial.js 下的 secure 路径为 `('../../app/config/secure')`
-我们打开 test/helper 目录下的 `fake_book` 文件夹，并运行
-`fake_book` 文件加下的 `index.js`，如果你的操作正确，你的数据库将会在多出两条书籍的数据。
+我们打开 test/helper 目录下的 `fake-book` 文件夹，并运行
+`fake-book` 文件加下的 `index.js`，如果你的操作正确，你的数据库将会在多出两条书籍的数据。
 
 ```bash
-node test/helper/fake_book
+node test/helper/fake-book
 ```
 
 下面，我们继续完善 `app/api/v1/book.js` 下的匿名视图函数，在上一步中，我们只是简
