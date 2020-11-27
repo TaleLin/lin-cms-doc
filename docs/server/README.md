@@ -38,8 +38,8 @@ app
 │   ├── book.js
 │   ├── log.js
 │   └── user.js
-├── extensions          # 扩展目录
-├── libs                # 其它类库
+├── extension           # 扩展目录
+├── lib                 # 其它类库
 │   ├── db.js           # Sequelize 实例
 │   ├── exception.js    # 异常类库
 │   ├── type.js         # 枚举
@@ -47,7 +47,7 @@ app
 ├── middleware          # 中间件目录
 │   ├── jwt.js
 │   └── logger.js
-├── models              # 模型层
+├── model               # 模型层
 │   ├── book.js
 │   ├── file.js
 │   ├── group-permission.js
@@ -56,8 +56,8 @@ app
 │   ├── permission.js
 │   ├── user-group.js
 │   └── user.js
-├── plugins             # 插件目录
-├── validators          # 校验层
+├── plugin              # 插件目录
+├── validator           # 校验层
 │   ├── admin.js        # 校验器模块
 │   ├── book.js
 │   ├── common.js
@@ -74,10 +74,10 @@ app
   第一版本的 API，v2 代表第二版本，cms 代表属于 cms 的 API。
 - 将程序的配置文件放在 `app/config` 文件夹下，并着重区分 `secure（安全性配置）`
   和 `setting（普通性配置）`。配置更详细内容参考[配置](./config.md)
-- 将可重用的类库放在 `app/libs` 文件夹下。
-- 将数据模型放在 `app/models` 文件夹下。
-- 将开发的插件放在 `app/plugins` 文件夹下。
-- 将校验类放在 `app/validators` 文件夹下。
+- 将可重用的类库放在 `app/lib` 文件夹下。
+- 将数据模型放在 `app/model` 文件夹下。
+- 将开发的插件放在 `app/plugin` 文件夹下。
+- 将校验类放在 `app/validator` 文件夹下。
 
 :::tip
 
@@ -130,11 +130,11 @@ router 时，你需传入红图的前缀`prefix`，如`/v1/book`，而后红图�
 koa 本身并非对数据库做出支持，Lin 通过集成`sequelize`这个 orm 库来进行数据访问，
 如果你不熟悉，请先阅读[官方文档](http://docs.sequelizejs.com/)。
 
-`Sequelize` 实例放在`app/libs/db.js`文件，你可以通过如下方式拿到这个实例：
+`Sequelize` 实例放在`app/lib/db.js`文件，你可以通过如下方式拿到这个实例：
 
 ```js
 // 路径根据实际情况进行引入
-import sequelize from '../../libs/db';
+import sequelize from '../../lib/db';
 // 使用 Sequelize 实例
 await sequelize.query(...);
 ```
