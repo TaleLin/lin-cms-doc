@@ -13,7 +13,11 @@ module.exports = {
       href:'/favicon.ico'
     }]
   ],
-    plugins: [
+  locales: {
+    '/': {},
+    '/0.2.x/': {}
+  },
+  plugins: [
     'vuepress-plugin-medium-zoom',
     ['vuepress-plugin-code-copy', {
       align:"bottom",
@@ -38,6 +42,9 @@ module.exports = {
     lastUpdated: '上次更新',
     locales: {
       '/': {
+        selectText: '选择版本',
+        label: '0.3.x',
+
         nav: [
           {
             text: '介绍',
@@ -224,6 +231,207 @@ module.exports = {
               children: ['/update/', 'flask', 'spring-boot', 'frontend']
             }
           ]
+          // '/guide/': [{
+          //   title: '指南（不完整，仅参考）',
+          //   children: ['/guide/', 'structure', 'best-practice']
+          // }],
+          // '/inside/': [{
+          //   title: '内部',
+          //   children: [
+          //     '/inside/',
+          //     'api',
+          //     'jwt',
+          //     'md_style',
+          //     'sse',
+          //     'plugin',
+          //     'default_plugins'
+          //   ]
+          // }],
+          // '/standard/': [{
+          //   title: '文档规范',
+          //   children: ['/standard/', 'directory-structure', 'component']
+          // }]
+        }
+      },
+      '/0.2.x/': {
+        selectText: '选择版本',
+        label: '0.2.x',
+        nav: [
+          {
+            text: '介绍',
+            link: '/0.2.x/'
+          },
+          {
+            text: '慕课课程',
+            link: '/0.2.x/imooc/'
+          },
+          {
+            text: '入门',
+            link: '/0.2.x/start/'
+          },
+          {
+            text: '后端',
+            link: '/0.2.x/server/'
+          },
+          {
+            text: '前端',
+            link: '/0.2.x/client/'
+          },
+          {
+            text: 'API',
+            link: '/0.2.x/api/'
+          },
+          {
+            text: '插件',
+            link: '/0.2.x/plugins/flask/'
+          },
+          {
+            text: '专栏',
+            link: 'https://course.talelin.com'
+          }
+          // {
+          //   text: '内部资料',
+          //   link: '/inside/'
+          // },
+          // {
+          //   text: '文档规范',
+          //   link: '/standard/'
+          // }
+        ],
+        sidebar: {
+          '/0.2.x/introduce/': [
+            {
+              title: '指南',
+              children: ['/introduce/', 'imooc', 'update']
+            }
+          ],
+          '/0.2.x/start/': [
+            {
+              title: 'koa入门',
+              children: [
+                '/start/koa/',
+                'koa/vue-client',
+                'koa/backend-demo',
+                'koa/frontend-demo'
+              ]
+            },
+            {
+              title: 'flask入门',
+              children: [
+                '/start/flask/',
+                'flask/vue-client',
+                'flask/backend-demo',
+                'flask/frontend-demo'
+              ]
+            },
+            {
+              title: 'spring-boot入门',
+              children: [
+                '/start/spring-boot/',
+                'spring-boot/vue-client',
+                'spring-boot/backend-demo',
+                'spring-boot/frontend-demo'
+              ]
+            }
+          ],
+          '/0.2.x/server/': [
+            {
+              title: 'koa',
+              children: [
+                '/server/koa/',
+                'koa/authority_model',
+                'koa/logger',
+                'koa/config',
+                'koa/validator',
+                'koa/token',
+                'koa/file',
+                'koa/logging',
+                'koa/unit_test',
+                'koa/questions'
+              ]
+            },
+            {
+              title: 'flask',
+              children: [
+                '/server/flask/',
+                'flask/run_process',
+                'flask/authority_and_models',
+                'flask/logger_and_notify',
+                'flask/config',
+                'flask/token',
+                'flask/file',
+                'flask/logging',
+                'flask/unit_test',
+                'flask/essay1',
+                'flask/questions'
+              ]
+            },
+            {
+              title: 'spring-boot',
+              children: [
+                '/server/spring-boot/',
+                'spring-boot/permission',
+                'spring-boot/logger',
+                'spring-boot/file',
+                'spring-boot/standard',
+                'spring-boot/logging',
+                'spring-boot/token',
+                'spring-boot/extension',
+                'spring-boot/structure',
+                'spring-boot/websocket'
+              ]
+            }
+          ],
+          '/0.2.x/client/': [
+            {
+              title: '前端核心',
+              children: [
+                '/client/',
+                'catalog',
+                'router',
+                'authority',
+                'model',
+                'exception',
+                'global'
+              ]
+            },
+            {
+              title: '前端组件库',
+              children: [
+                '/client/components/',
+                // 'components/table',
+                // 'components/button',
+                'components/icon',
+                'components/preview',
+                'components/imgUpload',
+                'components/multiple',
+                'components/tinymce',
+                'components/notify'
+              ]
+            }
+          ],
+          '/0.2.x/plugins/': [
+            {
+              title: '插件koa版',
+              children: [
+                '/plugins/koa/'
+                // 'koa/start',
+                // 'koa/fe_develop',
+                // 'koa/be_develop',
+                // 'koa/list',
+              ]
+            },
+            {
+              title: '插件flask版',
+              children: [
+                '/plugins/flask/',
+                'flask/start',
+                'flask/fe_develop',
+                'flask/be_develop',
+                'flask/list'
+              ]
+            }
+          ],
           // '/guide/': [{
           //   title: '指南（不完整，仅参考）',
           //   children: ['/guide/', 'structure', 'best-practice']
