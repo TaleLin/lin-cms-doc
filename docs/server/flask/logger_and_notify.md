@@ -13,15 +13,15 @@ logger 主要用来解决这一类的问题，当然你可以将记录任何你�
 我们修改`get_book`这个视图函数为：
 
 ```py
-from lin.log import Logger
+from lin.logger import Logger
 # 省略诸多代码
-@book_api.route('/<id>', methods=['GET'])
+@book_api.route('/<int:id>', methods=['GET'])
 @Logger(template='某用户查询了一本图书') # 推送的消息
-def get_book(id):
+def get_book(id:int):
     book = Book.query.filter_by(id=id).first()
-    if book is None:
-        raise NotFound(msg='没有找到相关书籍')
-    return jsonify(book)
+    if book: 
+        return book
+    raise NotFound('没有找到相关书籍')
 ```
 
 接下来，当有任何用户请求这个 API 时，均会在数据库中写入一条日志信息。该日志信息的数据模型的定义在`lin.core`中，对应的数据表名为`lin_log`。
@@ -29,17 +29,16 @@ def get_book(id):
 但有时，*某用户查询了一本图书*这样的信息未免显得太过于单薄，它无法很好的向前端说明更多的信息。因此 Lin 提供了一个简单的模板语法，你可以在`template`这个参数中，写入一些变量，如`{user.username}查询了一本图书`，请记住每一个`{}`中就可以写入一个变量，`user.username`就表示当前用户的昵称。如下：
 
 ```py
-from lin.log import Logger
-from lin import route_meta, group_required, login_required
+from lin.logger import Logger
 # 省略诸多代码
-@book_api.route('/<id>', methods=['GET'])
+@book_api.route('/<int:id>', methods=['GET'])
 @Logger(template='{user.username}查询了一本图书') # 推送的消息
 @login_required # 必须，如果用户不登陆，就没有user这个实例
-def get_book(id):
+def get_book(id:int):
     book = Book.query.filter_by(id=id).first()
     if book is None:
-        raise NotFound(msg='没有找到相关书籍')
-    return jsonify(book)
+        return book
+    raise NotFound('没有找到相关书籍')
 ```
 
 此时，你每请求一次这个 API，它就会在数据中写下下面类似的信息（请注意，这个 API 现在请求必须登陆）。
@@ -81,7 +80,7 @@ notify 主要用来解决服务器向前端推送消息，例如当购物小程�
 我们再次修改`get_book`这个视图函数为：
 
 ```py
-from lin.log import Logger
+from lin.logger import Logger
 from lin.notify import Notify
 # 省略代码。。。
 @book_api.route('/<id>', methods=['GET'])

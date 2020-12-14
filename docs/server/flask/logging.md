@@ -100,6 +100,6 @@ def index():’
 ## 自定义日志类
 在简介中我们提到了如果开发者觉得Lin的日志记录方式不适用于自己的业务场景，可以自定义自己的日志类，本小结我们来看一看如何自定义自己的日志类，首先，我们先来关闭Lin的日志，找到app/app.py的create_app方法，实例化Lin的时候将logger设置为False：
 ```python
- Lin(app, logger=False)
+ Lin(app, syslogger=False)
 ```
 此时，你就可以实现自己的日志类并且使用到项目当中了。当然，具体的实现方法不一，在标准库`logging.handlers`模块下，定义了各种方式的记录日志类，可以参考或者直接使用这个模块下面的日志处理类。

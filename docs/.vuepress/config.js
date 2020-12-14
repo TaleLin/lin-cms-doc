@@ -152,6 +152,7 @@ module.exports = {
                 'flask/logger_and_notify',
                 'flask/config',
                 'flask/token',
+                'flask/exception',
                 'flask/file',
                 'flask/logging',
                 'flask/unit_test',

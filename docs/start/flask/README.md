@@ -16,82 +16,95 @@ Lin 的 Server 端是基于 Python Flask 的, 所以你必须首先在自己的 
 对于初学者，我们建议首先安装 Server 的环境，在将 Server 端运行、调试通过后再进行 Client 的安装和配置。
 :::
 
-## Server 端必备环境
+## 快速开始
 
-- 安装`MySQL`（version： 5.6+）
+### Server 端必备环境
 
 - 安装`Python`环境(version： 3.6+)
 
-## 获取工程项目
+### 获取工程项目
 
-打开你的命令行工具（terminal），在其中键入:
-
-```bash
-git clone https://github.com/TaleLin/lin-cms-flask.git starter
-```
-
-:::tip
-此处我们以 `starter` 作为工程名，当然你也可以以任意你喜爱的名字作为工程名。
-
-如果你想以某个版本，如`0.0.1`版，作为起始项目，那么请在 github 上的版本页下载相应的版本即可。
-:::
-
-## 安装依赖包
-
-我们强烈建议使用 Python 的虚拟环境来安装依赖包，推荐使用 Pipenv 来创建虚拟环境。关于`Pipenv`的更多使用请参考[Pipenv 官网](https://pipenv.readthedocs.io/en/latest/)。接下来，继续在命令行中输入：
+打开您的命令行工具（terminal），在其中键入:
 
 ```bash
-cd starter && pipenv install --dev
+git clone https://github.com/TaleLin/lin-cms-flask.git -b 0.3.x starter
 ```
 
-执行此命令前，请确保系统中已成功安装了 pipenv。这将为 Lin 创建一个虚拟环境并安装所有依赖包。如果你不想使用虚拟环境，那么键入以下命令：
+> **Tips:** 当前分支不是默认分支，所以需要分支切换到`0.3.x`
+>
+> 我们以 `starter` 作为工程名，当然您也可以以任意您喜爱的名字作为工程名。
+>
+> 如果您想以某个版本，如`0.0.1`版，作为起始项目，那么请在 github 上的版本页下载相应的版本即可。
+
+### 安装依赖包
+
+进入项目目录，调用环境中的 pip 来安装依赖包:
 
 ```bash
-cd starter && pip install -r requirements.txt
+pip install -r requirements-${env}.txt
 ```
 
-这将调用系统环境中的 pip 来安装依赖包。
+### 数据库配置
 
-## 数据库配置
+#### 默认使用 Sqlite3
 
-Lin 需要你自己在 MySQL 中新建一个数据库，名字由你自己决定。例如，新建一个名为 lin-cms 的数据库，数据库字符编码设置为`utf-8`。接着，我们需要在工程中进行一项简单的配置。使用编辑器打开 Lin 工程的`app/config/secure.py`，找到如下配置项：
+Lin 默认启用 Sqlite3 数据库，打开项目根目录下的.env 文件(我们提供了开发环境的`.development.env`和生产环境的`.production.env`)，配置其`SQLALCHEMY_DATABASE_URI`
 
-```py
+> Tips: 下面我们用{env}指代配置对应的环境
+
+```conf
 # 数据库配置示例
-SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://root:123456@localhost:3306/lin-cms'
+    SQLALCHEMY_DATABASE_URI='sqlite:///relative/path/to/file.db'
+
+    or
+
+    SQLALCHEMY_DATABASE_URI='sqlite:////absolute/path/to/file.db'
 ```
 
-请在`SQLALCHEMY_DATABASE_URI`这项中配置 MySQL 数据库的用户名、密码、ip、端口号与数据库名。**请务必根据自己的实际情况修改此配置项**。
+这将在项目的最外层目录生成名为`lincms${env}.db`的 Sqlite3 数据库文件。
 
-:::warning
-你所使用的数据库账号必须具有创建数据表的权限，否则 Lin 将无法为你自动创建数据表
-:::
+#### 使用 MySQL
 
-## 运行
+**Tips:** 默认的依赖中不包含 Python 的 Mysql 库，如有需要，请自行在您的运行环境中安装它（如`pymysql`或`cymysql`等）。
 
-一切就绪后，再次从命令行中使用 Python 命令运行项目根目录下的`starter.py`：
+Lin 需要您自己在 MySQL 中新建一个数据库，名字由您自己决定(例如`lincms`)。
+
+创建数据库后，打开项目根目录下的`.${env}.env`文件，配置对应的`SQLALCHEMY_DATABASE_URI`。
+
+如下所示：
+
+```conf
+# 数据库配置示例: '数据库+驱动库://用户名:密码@主机:端口/数据库名'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@localhost:3306/lincms'
+```
+
+> 您所使用的数据库账号必须具有创建数据表的权限，否则 Lin 将无法为您自动创建数据表
+
+### 初始化
+
+如果您是第一次使用 **`Lin-CMS`**，需要初始化数据库。
+
+请先进入项目根目录，然后执行`flask db init`,用来添加超级管理员 root(默认密码 123456), 以及新建其他必要的分组
+
+> **Tips:**
+> 如果您需要一些业务样例数据，可以执行脚本`flask db fake`添加它
+
+### 运行
+
+一切就绪后，再次从命令行中执行
 
 ```bash
-python starter.py
+flask run
 ```
 
-如果你是以 pipenv 创建的虚拟环境，那么请先通过下面命令进入虚拟环境，再运行上面的命令。
-
-```bash
-pipenv shell
-```
-
-如果一切顺利，你将在命令行中看到项目成功运行的信息。如果你没有修改代码，Lin 将默认在本地启动一个端口号为 5000 的端口用来监听请求。此时，我们访问http://localhost:5000，将看到一组字符：
+如果一切顺利，您将在命令行中看到项目成功运行的信息。如果您没有修改代码，Lin 将默认在本地启动一个端口号为 5000 的端口用来监听请求。此时，我们访问`http://localhost:5000`，将看到一组字符：
 
 “心上无垢，林间有风"
 
-这证明你已经成功的将 Lin 运行起来了，Congratulations！
+点击“心上无垢”，将跳转到`Redoc`页面；点击“林间有风”，跳转到`Swagger`页面。
 
-欣喜之余，请你运行一下根目录下的`add_super.py`文件，我们会为在数据库中新建一个超级管理员账户，方便你后续在前端登陆。
+这证明您已经成功的将服务运行起来了，Congratulations！
 
-```bash
-python add_super.py
-```
 
 如果你安装时遇到问题，那么尝试看看[常见问题汇总](../../server/flask/questions.md)，看能否解决，或者去我们的 github 仓库看 issue。如果没有出现你的问题，请给我们提 issue。
 
