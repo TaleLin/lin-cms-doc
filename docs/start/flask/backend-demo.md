@@ -6,9 +6,26 @@ title: 后端快速上手
 
 接下来，我们将开始一个简单的图书项目，来帮你熟悉整个项目的开发流程。
 
+`Lin-CMS-Flask`提供的图书代码是帮助开发者熟悉框架的demo样例，现在你可以按如下步骤将它直接删除：
+
+1. 删除 app/api/v1
+2. 删除 app/model/v1
+3. 删除 app/app.py 中的两行代码
+```python
+...
+    from app.api.v1 import create_v1
+
+    app.register_blueprint(create_v1(), url_prefix="/v1")
+...
+```
+
+好了，现在让我们重新出发。
+
 ## 视图控制
 
-打开 `app/api/v1` 文件夹，在该文件夹里新建 `book.py` 文件。我们从 `Lin` 从导入红图来创建 API 视图：
+创建并打开 `app/api/v1` 文件夹，新建 `book.py` 文件。
+
+接着，我们从 `Lin` 从导入红图来创建 API 视图：
 
 ```py
 from lin.redprint import Redprint
@@ -22,23 +39,25 @@ from lin.redprint import Redprint
 
 ```py
 from lin.redprint import Redprint
-from flask import jsonify
 
 book_api = Redprint('book')
 
 
 @book_api.route('/<id>', methods=['GET'])
 def get_book(id):
-    return jsonify({
+    return {
         'msg': 'hello, I am a book'
-    })
+    }
 ```
+
+> **Tips:** 
+> Flask 1.1.1 之后可以直接返回`dict`, 不需要再使用`jsonify(...)`(当然调用也不会报错)。
 
 如果你熟悉 Flask，应该可以发现这与 Flask 的 API 开发几乎一致，不过我们提供了一个红图的机制，让 API 的开发更加细粒度化。
 
 到此一个简单的图书 API 开发就实现了，但是我们此时运行程序并不能访问到该 API。我们还需要将该红图挂载到项目的默认 API 蓝图上。
 
-打开 `app/api/v1/__init__.py` 文件，向其中添加如下内容：
+创建 `app/api/v1/__init__.py` 文件，向其中添加如下内容：
 
 ```py
 from flask import Blueprint
@@ -51,9 +70,32 @@ def create_blueprint_v1():
     return bp_v1
 ```
 
-现在，我们已经可以通过 HTTP 请求到该 API 了，运行程序。然后通过 curl（你可以使用任何你喜爱的测试工具，postman 甚至浏览器都行） 访问 `http://127.0.0.1:5000/v1/book/1`。
+最后，在`app/app.py`中，向`app`注册 `bp_v1` 蓝图。
+
+还记得我们删除的那两行代码么，把它们写到下面的函数中：
+
+```python
+def register_blueprints(app):
+    from app.api.cms import create_cms
+    # 引入 v1 蓝图
+    from app.api.v1 import create_v1
+    # 注册 v1 蓝图
+    app.register_blueprint(create_v1(), url_prefix="/v1")
+    app.register_blueprint(create_cms(), url_prefix="/cms")
+```
+
+
+现在，我们已经可以通过 HTTP 请求到该 API 了，运行服务:
+
+```bash
+flask run
+```
+> **Tips:** 在请求测试接口时，请确认服务处于正常运行状态，后面不再赘述。
+
+然后通过 选择一种请求测试工具，如curl、httpie、postman或者浏览器，访问 `http://127.0.0.1:5000/v1/book/1`。
 
 如果一切顺利，你就可以在 terminal 中看到下面返回数据：
+
 
 ```py
 {
@@ -61,27 +103,26 @@ def create_blueprint_v1():
 }
 ```
 
-## 模型使用
+## 数据库模型使用
 
-打开 `app/models` 文件夹，在该文件夹下新建 `book.py` 文件，并加入以下内容：
+打开 `app/model/v1` 文件夹，在该文件夹下新建 `book.py` 文件，并加入以下内容：
 
 ```py
-from sqlalchemy import Column, String, Integer
-
 from lin.interface import InfoCrud as Base
+from sqlalchemy import Column, Integer, String
 
 
 class Book(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(50), nullable=False)
-    author = Column(String(30), default='未名')
+    author = Column(String(30), default="未名")
     summary = Column(String(1000))
-    image = Column(String(50))
+    image = Column(String(100))
 ```
 
 我们新建了一个 `Book` 的 Model，该模型继承自 `InfoCrud`，有关于 `InfoCrud` 的详细，将在[后续](../server/authority_and_models.md##InfoCrud和BaseCrud)详细介绍，本章我们注重于 CMS 的开发使用。
 
-有了该模型后，我们打开根目录下的 `fake.py` 文件，并运行 `fake.py` 文件，如果你的操作正确，你的数据库将会在多出两条书籍的数据。
+有了该模型后，我们运行 `flask db fake` 命令，如果你的操作正确，你的数据库中将会存在一张`book`表，且包含两条书籍的数据。
 
 下面，我们继续完善 `app/api/v1/book.py` 下的 `get_book` 函数，在上一步中，我们只是简单的返回了一条信息，但是在真正的开发中，数据库几乎是任何应用都摆脱不了的一环。
 
@@ -99,90 +140,123 @@ book_api = Redprint('book')
 @book_api.route('/<id>', methods=['GET'])
 def get_book(id):
     book = Book.query.filter_by(id=id).first() # 通过Book模型在数据库中查询id=`id`的书籍
-    if book is None:
-        raise NotFound(msg='没有找到相关书籍') # 如果书籍不存在，返回一个异常给前端
-    return jsonify(book) # 如果存在，返回该数据的信息
+    if book:
+        return book # 如果存在，返回该数据的信息
+    raise NotFound('没有找到相关书籍') # 如果书籍不存在，返回一个异常给前端
 ```
+> **Tips:**
+>
+> 现在，直接返回数据库的模型实例，也可以被自动序列化了。
+>
+> 异常类允许直接传入告警文字或数字作为参数，新版本的异常新增了多项功能，我们将在[异常](../server/exceptin.md)详细介绍。
+
 
 在上面重写的 `book.py` 文件中，我们使用到了 `flask-sqlalchemy` 提供的便捷查询 API，详细使用请参考[官网](http://flask-sqlalchemy.pocoo.org/2.3/)。
 
-至此，我们再次运行根目录下的 `starter.py` 文件，并通过 curl 再次访问`http://127.0.0.1:5000/v1/book/1`，我们会得到如下数据：
+通过 curl 再次访问`http://127.0.0.1:5000/v1/book/1`，我们会得到如下数据：
 
-```bash
+```json
 {
   "author": "Randal E.Bryant",
-  "create_time": 1539702050000,
+  "create_time": "2020-12-20 12:20:36",
   "id": 1,
   "image": "https://img3.doubanio.com/lpic/s1470003.jpg",
-  "summary": "********"
+  "summary": "......"
 }
 ```
 
 ## 参数校验
 
+> **Tips:**
+> `WTForms`参数校验，请参考0.2.x版本的文档，新版本建议使用`Pydantic`进行参数校验。
+
 在应用的开发中，尤其是在 Web 领域中，对于任何从用户传入的数据都是无规则可循的，我们无法去预测用户传入的数据，因此参数（数据）校验是开发中不可或缺的一环。
 
-我们打开 `app/validators/forms.py` 文件，向其中*添加*如下内容：
+访问`http://127.0.0.1:5000/v1/book/a`，我们会得到如下报错：
 
-```py
-# ********
-# ********
+> TODO:报错提示1
 
-class BookSearchForm(Form):
-    q = StringField(validators=[DataRequired(message='必须传入搜索关键字')]) # 前端的请求参数中必须携带`q`
+将装饰器修改为
+```python
+@book_api.route('/<id>', methods=['GET'])
+def get_book(id):
+    ....
 ```
 
-我们新建了一个 `BookSearchForm` 的校验类，当前端传入数据时必须携带 `q` 这个参数，它被用来查询书籍。
+再次访问`http://127.0.0.1:5000/v1/book/a`，我们会得到如下报错：
+
+> TODO:报错提示2
+
+告知我们传入的路径参数类型不匹配。
+
+路径参数可以由Flask自带的规则帮助校验，那其他种类参数如何校验呢？
+
+我们打开 `app/validators/book.py` 文件，向其中*添加*如下内容：
+
+```py
+from lin import BaseModel
+
+
+class BookQuerySearchSchema(BaseModel):
+    q: Optional[str] = str()
+```
+> **Tips:** 我们对`BaseModel`做了一些更改，请从`lin`中引入。
+
+我们新建了一个 `BookQuerySearchSchema` 的校验类，当前端传入数据时必须携带 `q` 这个参数，它被用来查询书籍。
 
 然后，我们在 `app/api/v1/book.py` 文件中新增一个视图函数 `search`:
 
-```py
-from app.validators.forms import BookSearchForm
-# *******
+```python
+from app.validators.book import BookQuerySearchSchema
+from flask import g
+from app.api import api
+
 @book_api.route('/search', methods=['GET'])
+#query代表来自url中的参数，如`http://127.0.0.1:5000?q=abc&page=1`中的 `q` 和 `page`都属于query参数
+@api.validate(query=BookQuerySearchSchema) 
 def search():
-    form = BookSearchForm().validate_for_api() # 对前端的参数进行校验
-    q = '%' + form.q.data + '%' # 取出参数中的`q`参数，mysql的特性，加`%`进行模糊查询
+    # 校验通过的参数将会被挂载到g的对应属性上，方便直接取用。
+    q = '%' + g.q + '%' # 取出参数中的`q`参数，加`%`进行模糊查询
     books = Book.query.filter(Book.title.like(q)).all() # 搜索书籍标题
-    if books is None or len(books) < 1:
-        raise NotFound(msg='没有找到相关书籍')
-    return jsonify(books) # 返回书籍
+    if books:
+        return books
+    raise NotFound('没有找到相关书籍')
 ```
 
-最后，我们再次运行根目录下的 `starter.py` 文件，并通过 curl 再次访问 `http://127.0.0.1:5000/v1/book/search`，我们会得到如下数据：
+最后，我们再次运行根目录下的 `flask run` 文件，并通过 curl 再次访问 `http://127.0.0.1:5000/v1/book/search`，我们会得到如下数据：
 
 ```py
 {
     "error_code": 10030,
-    "msg": {"q": ["必须传入搜索关键字"]},
+    "msg": {"q": ["field required"]},
     "request": "GET  /v1/book/search"
 }
 ```
 
 很明显我们未输入参数 `q`，因此校验未通过。我们修改 url 为 `http://127.0.0.1:5000/v1/book/search?q=C`，会得到如下数据：
 
-```py
+```json
 [
   {
     "author": "（美）Brian W. Kernighan",
     "create_time": 1539702050000,
     "id": 2,
     "image": "https://img3.doubanio.com/lpic/s1106934.jpg",
-    "summary": "在计算机发展的历史上，没有哪一种程序设计语言像C语言这样应用广泛。本书原著即为C语言的设计者之一Dennis M.Ritchie和著名计算机科学家Brian W.Kernighan合著的一本介绍C语言的权威经典著作。我们现在见到的大量论述C语言程序设计的教材和专著均以此书为蓝本。原著第1版中介绍的C语言成为后来广泛使用的C语言版本——标准C的基础。人们熟知的“hello,World\"程序就是由本书首次引入的，现在，这一程序已经成为众多程序设计语言入门的第一课。\n原著第2版根据1987年制定的ANSIC标准做了适当的修订．引入了最新的语言形式，并增加了新的示例，通过简洁的描述、典型的示例，作者全面、系统、准确地讲述了C语言的各个特性以及程序设计的基本方法。对于计算机从业人员来说，《C程序设计语言》是一本必读的程序设计语 言方面的参考书。",
+    "summary": "......",
     "title": "C程序设计语言"
   }
 ]
 ```
-
+# TODO 下文未更新  
 ## 自定义异常
 
 在刚才的图书搜索 API 中，当程序没有找到相关的书籍时，会抛出一个 `NotFound` 的异常。`NotFound` 是 Lin 基础库提供的一种异常，现在有如下需求：我们需要自定义一个 `BookNotFound` 的异常来专门表示图书未找到。打开 `app/libs/error_code.py`，在其中添加如下内容：
 
-```py
+```python
 class BookNotFound(APIException):
     code = 404 # http状态码
     msg = '没有找到相关图书' # 异常信息
-    error_code = 80010 # 约定的异常码
+    message_code = 80010 # 约定的异常码
 ```
 
 :::warning
