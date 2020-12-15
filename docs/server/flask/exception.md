@@ -1,4 +1,5 @@
 ---
-title: 自定义异常类 APIException
+title: 自定义异常
 ---
+
 # 待更新
