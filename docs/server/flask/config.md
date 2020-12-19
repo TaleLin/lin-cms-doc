@@ -4,7 +4,20 @@ title: 配置
 
 # <H2Icon /> 配置
 
-## Lin-CMS-FLask 配置加载顺序
+## 前言
+
+我们曾不止一次的提到，Lin 是一个基于 Flask 的框架，你可以把 Lin 理解成一个 Flask 的上层框架。这个概念**很重要**，意味着你可以在 Lin 中去使用 Flask 的一切特性，它支持三种配置方式:
+
+1. 环境变量的方式
+   通过加载记录环境变量的文件，如`.flaskenv`,`.development.env`文件，来导入环境变量配置。
+2. 配置文件的方式
+   通过加载专门的配置文件，如`app/config/development.py`文件，来导入配置。
+3. 硬编码的方式。
+   你可以直接在代码中通过值的方式来进行配置。
+
+当然，优先级也是依次递增的。
+
+## Lin-CMS-Flask 配置加载顺序
 
 1. 从 .flaskenv 中读取 Flask 本身的环境变量。
 
@@ -75,15 +88,22 @@ title: 配置
 2. 创建`.myenv.env`, `app/config/myenv.py`。
 3. 对照样例代码补充自己的配置逻辑。
 
-## 小结
+## （Optional）无关上下文和核心对象的全局配置
 
-我们曾不止一次的提到，Lin 是一个基于 Flask 的框架，你可以把 Lin 理解成一个 Flask 的上层框架。这个概念**很重要**，意味着你可以在 Lin 中去使用 Flask 的一切特性，它支持三种配置方式:
+初始化核心对象调用`create_app`传参时， 以 `config_`开头的关键字参数，传入的对象会被挂载到`lin.config.global_config`字典下，作为可被全局调用的配置。
+例如:
 
-1. 环境变量的方式
-   通过加载记录环境变量的文件，如`.flaskenv`,`.development.env`文件，来导入环境变量配置。
-2. 配置文件的方式
-   通过加载专门的配置文件，如`app/config/development.py`文件，来导入配置。
-3. 硬编码的方式。
-   你可以直接在代码中通过值的方式来进行配置。
+```python
+app = create_app(
+    ...
+    config_MESSAGE=MSG,
+    ...
+)
+```
 
-当然，优先级也是依次递增的。
+可以通过以下方式获取：
+
+```python
+from lin.config import global_config
+message = global_config.get("MESSAGE")
+```
