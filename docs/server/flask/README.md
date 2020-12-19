@@ -19,41 +19,44 @@ title: 项目结构及开发规范
 > 提炼而来的一种规范，它不仅仅是结构，风格还有诸多细节，你会在后续逐渐了解到。
 
 ```bash
-│   code.md // 记录自定义的返回码和信息
-│   fake.py // 测试和做假数据的脚本
-│   `starter.py` // 程序的开始文件
-└───app // app目录
-    │   app.py // 创建Flask app及应用扩展
-    │   __init__.py // 默认的包初始化文件
-    │
-    ├───api // api目录
-    │   │   __init__.py // 默认的包初始化文件
-    │   │
-    │   ├───cms // 开发CMS API目录
-    │   │   │   __init__.py // 创建CMS2蓝图
-    │   │
-    │   ├───v1 // 开发普通API目录
-    │   │   │   book.py // 上节的book测试文件
-    │   │   │   __init__.py // 创建v1蓝图
-    │
-    ├───config // 配置文件目录
-    │   │   `secure.py` // 有关于安全的配置
-    │   │   setting.py // 基础配置
-    │
-    ├───libs // 类库文件夹
-    │   │   error_code.py // 自定义异常文件
-    │   │   utils.py // 工具文件
-    │
-    ├───models // 模型文件夹
-    │   │   book.py // book模型文件
-    │   │   __init__.py // 默认的包初始化文件
-    │
-    ├───plugins // Lin插件目录
-    │       .gitkeep
-    │
-    ├───validators // 校验类存放目录
-    │   │   forms.py // 校验类文件
-    │   │   __init__.py // 默认的包初始化文件
+├── LICENSE
+├── README.md
+├── app // 项目主目录
+│   ├── __init__.py
+│   ├── app.py  // 创建Flask app及应用扩展
+│   ├── api // WEB API 模块
+│   │   ├── __init__.py
+│   │   ├── cms // 开发CMS API目录
+│   │   └── v1 // 开发业务 API目录
+│   ├── assets // 本地上传文件存放目录
+│   ├── cli // flask cli 模块
+│   │   ├── __init__.py
+│   │   ├── db // 数据库 cli 模块
+│   │   └── plugin // 插件 cli 模块
+│   ├── config // 配置模块
+│   ├── exception //自定义异常模块
+│   │   ├── __init__.py
+│   │   └── api.py // 自定义API异常
+│   ├── extension // 扩展模块
+│   ├── model // 数据模型模块
+│   │   ├── __init__.py
+│   │   ├── lin // Lin-CMS 模型模块
+│   │   └── v1  // 自定义业务模型模块
+│   ├── plugin // 插件模块
+│   ├── util // 工具模块
+│   │   ├── __init__.py
+│   │   ├── common.py // 通用工具功能函数
+│   │   └── page.py // 视图函数分页功能函数
+│   └── validator // 校验验证模块
+│       ├── __init__.py
+│       ├── form.py // WTForms 校验类
+│       └── schema.py  // 数据校验模型类
+├── gunicorn.conf.py // gunicorn 部署配置文件
+├── logs // 运行日志
+├── requirements-dev.txt // 开发环境依赖
+├── requirements-prod.txt // 生产环境依赖
+├── starter.py // 程序入口文件
+└── tests  // 单元测试目录
 ```
 
 上面是 starter 项目的整体结构，开发时我们强烈建议你遵循如下规范开发，在前期你肯
@@ -61,12 +64,12 @@ title: 项目结构及开发规范
 
 - 在 `app/api` 文件夹中开发 API，并将不同版本，不同类型的 API 分开，如：v1 代表
   第一版本的 API，v2 代表第二版本，cms 代表属于 cms 的 API。
-- 将程序的配置文件放在 `app/config` 文件夹下，并着重区分 `secure（安全性配置）`
-  和 `setting（普通性配置）`。配置更详细内容参考[配置](./config.md)
-- 将可重用的类库放在 `app/libs` 文件夹下。
-- 将数据模型放在 `app/models` 文件夹下。
-- 将开发的插件放在 `app/plugins` 文件夹下。
-- 将校验类放在 `app/validators` 文件夹下。
+- 将程序的配置文件放在 `app/config` 文件夹下。配置更详细内容参考[配置](./config.md)
+- 将可重用的类库放在 `app/util` 文件夹下。
+- 将数据模型放在 `app/model` 文件夹下。
+- 将开发的插件放在 `app/plugin` 文件夹下。
+- 将校验类放在 `app/validator` 文件夹下。
+  ...
 
 ## 开发规范
 
@@ -110,22 +113,8 @@ class Redprint:
 细粒度的 API 传递到相应的蓝图（Flask 自带的机制）中。因此红图的书写方式几乎与蓝
 图保持一致，相较于其它 API 开发方式，你几乎不需要任何学习成本。
 
-一般的，我们推荐你在一类 API 中新建一个红图（如 Book 这一类，它负责与图书相关的
-API）。如下：
-
-```py
- # book.py
- book_api = Redprint('book') # 创建book红图
-
- @book_api.route('/<id>', methods=['GET'])
- def get_book(id):
-     book = Book.query.filter_by(id=id).first()
-     if book is None:
-         raise NotFound(msg='没有找到相关书籍')
-     return jsonify(book)
-```
-
-如果你熟悉 Flask，你会发现这几乎与 Flask 的标准开发方式一样。新建红图时，你需传
+一般的，我们推荐你在一类 API 中新建一个红图（如快速上手中， Book 这一类，它负责与图书相关的
+API）。如果你熟悉 Flask，你会发现这几乎与 Flask 的标准开发方式一样。新建红图时，你需传
 入红图的名称，如`book`，而后红图会自己在访问的 url 中加入`/book`前缀。
 
 在 Flask 的开发中，几乎都会墨守成规的使用*装饰器*来优雅的书写视图函数，我们承袭
@@ -212,9 +201,6 @@ def handle_error(self, app):
 熟悉 Flask 的肯定知道，这就是 Flask 处理异常的方式。在项目开发中我们强力推荐，甚
 至可以说是**要求**你在开发的过程中，关于某一类的异常一定要通过继
 承`APIException`的方式来自定义，这会让前后端的交互更加友好。
-
-当然，当你每自定义一个异常后，别忘记在根目录下的`code.md`中记录相关异常的
-error_code 和 msg，方便前端查阅和团队协作。
 
 ### 数据校验规范
 
