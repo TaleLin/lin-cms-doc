@@ -4,55 +4,86 @@ title: 配置
 
 # <H2Icon /> 配置
 
-## 前言
+## Lin-CMS-FLask 配置加载顺序
 
-我们曾不止一次的提到，Lin 是一个基于 Flask 的框架，你可以把 Lin 理解成一个 Flask 的上层框架。这个概念**很重要**，意味着你可以在 Lin 中去使用 Flask 的一切特性。
+1. 从 .flaskenv 中读取 Flask 本身的环境变量。
 
-配置是应用中一个很重要的部分，一般的我们把通用性、安全性的参数提取为一个配置项。当修改这个配置时，在应用中所有使用该配置的地方都会同时生效。
+   - FLASK_ENV：启动环境，development, testing and production. **决定加载配置的入口**
+   - FLASK_RUN_HOST: 启动监听 IP 地址
+   - FLASK_RUN_PORT: 启动监听端口
+   - FLASK_APP: 启动入口，flask 核心对象
 
-Flask 框架本身提供了两种配置方式。
+2. 根据`FLASK_ENV`的启动环境，读取此环境对应的项目配置 env。
 
-- 硬编码的方式。
-  你可以直接在代码中通过`app.config['DEBUG'] = True`这种赋值的方式来进行配置。
-- 配置文件的方式
-  通过加载专门的配置文件，如`setting.py`文件，来导入配置。
+   > **Tips:**
+   >
+   > 比如`FLASK_ENV`指定以`development`环境启动，则读取`.development.env`
+   >
+   > 一般包含私密配置，建议不要将此文件上传的公开仓库。
 
-Lin 本身并未对 Flask 的配置方式进行任何更改和扩展。在这里我们便不再详细赘述，如果你不熟悉请先阅读 Flask 的配置文档[Flask](http://flask.pocoo.org/docs/1.0/config/#configuration-basics)。
+   - SQLALCHEMY_DATABASE_URI: 数据库链接
+   - SECRET_KEY: FLASK 密钥
 
-## Lin 的既有配置
+3.根据`FLASK_ENV`的启动环境，读取此环境对应的项目配置 py。
 
-在[项目结构及开发规范](./README.md)一节中，我们谈到所有的配置文件均在`app/config`该目录下，并着重区分了`setting.py`（普通配置）和`secure.py`（安全配置，如数据库密码等）这两个配置文件。
+> **Tips:**
+>
+> 比如`FLASK_ENV`指定以`development`环境启动，则读取`app/config/development.py`
 
-下面我们来详细说明一下这两个文件里面配置的作用：
+默认情况下在此 python 配置文件中继承了我们提供的初始配置，你也可以根据需要覆盖其配置，如:
 
-```py
-# secure.py
-# 安全性配置
-SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://root:123456@localhost:3306/lin-cms'
+```pytyhon
+    # 指定加密KEY
+    SECRET_KEY = os.getenv("SECRET_KEY", "https://github.com/TaleLin/lin-cms-flask")
 
-SECRET_KEY = '\x88W\xf09\x91\x07\x98\x89\x87\x96\x20A\xc63\xf9\xecJJU\x17\xc5V\xbe\x8b\xef\xd7\xd8\xd3\xe6\x95*4'
+    # 指定数据库
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+        "SQLALCHEMY_DATABASE_URI",
+        "sqlite:////" + os.getcwd() + os.path.sep + "lincms.db",
+    )
+
+    # 指定访问api服务的url, 用于本地文件上传
+    SITE_DOMAIN="https://lincms.example.com"
+
+    # 令牌有效期配置
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
+    # 默认文件上传配置
+    FILE = {
+        "STORE_DIR": "app/assets",
+        "SINGLE_LIMIT": 1024 * 1024 * 2,
+        "TOTAL_LIMIT": 1024 * 1024 * 20,
+        "NUMS": 10,
+        "INCLUDE": set(["jpg", "png", "jpeg"]),
+        "EXCLUDE": set([]),
+    }
+
+    # 运行日志
+    LOG = {
+        "LEVEL": "DEBUG",
+        "DIR": "logs",
+        "SIZE_LIMIT": 1024 * 1024 * 5,
+        "REQUEST_LOG": True,
+        "FILE": True,
+    }
 ```
 
-- SQLALCHEMY_DATABASE_URI。数据库配置项，默认数据库为`mysql`，数据库在本地`localhost`，端口号默认`3306`，数据库名默认`lin-cms`，账户名默认`root`，密码默认`123456`。如你需更改数据库配置，请在此项更改。
+## 自定义配置文件
 
-- SECRET_KEY。 用于令牌生成的密匙，此处请务必修改，防止密匙与他人一样导致令牌被破解。
+你也可以完全按照需要自己定义全套配置文件：
 
-```py
-# setting.py
-# 基础配置
+1. 从`.flaskenv`开始，指定 flask `FLASK_ENV`为`myenv`。
+2. 创建`.myenv.env`, `app/config/myenv.py`。
+3. 对照样例代码补充自己的配置逻辑。
 
-from datetime import timedelta
+## 小结
 
-# 分页配置
-COUNT_DEFAULT = 10
-PAGE_DEFAULT = 0
+我们曾不止一次的提到，Lin 是一个基于 Flask 的框架，你可以把 Lin 理解成一个 Flask 的上层框架。这个概念**很重要**，意味着你可以在 Lin 中去使用 Flask 的一切特性，它支持三种配置方式:
 
-# 令牌配置
-JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
-```
+1. 环境变量的方式
+   通过加载记录环境变量的文件，如`.flaskenv`,`.development.env`文件，来导入环境变量配置。
+2. 配置文件的方式
+   通过加载专门的配置文件，如`app/config/development.py`文件，来导入配置。
+3. 硬编码的方式。
+   你可以直接在代码中通过值的方式来进行配置。
 
-- COUNT_DEFAULT。分页配置，每页的数目，默认`10`。
-
-- PAGE_DEFAULT。分页配置，默认从第`1`页开始。
-
-- JWT_ACCESS_TOKEN_EXPIRES。 `access_token`的过期时间，默认为 1 小时（推荐）。
+当然，优先级也是依次递增的。
