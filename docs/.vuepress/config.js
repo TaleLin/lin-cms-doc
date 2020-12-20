@@ -155,8 +155,8 @@ module.exports = {
                 'flask/exception',
                 'flask/file',
                 'flask/logging',
-                'flask/db',
-                'flask/schema_and_openapi',
+                // 'flask/db',
+                // 'flask/schema_and_openapi',
                 'flask/unit_test',
                 'flask/essay1',
                 'flask/questions'
