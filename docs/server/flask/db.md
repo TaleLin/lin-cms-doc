@@ -1,5 +1,5 @@
 ---
-title: Lin ORM数据库对象
+title: Lin db
 ---
 
-# 待更新
+## db 功能增强
