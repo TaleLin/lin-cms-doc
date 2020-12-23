@@ -4,9 +4,17 @@ title: spring-boot 日志
 
 # 更新日志
 
-最新版本 `v0.2.0-RC1`   
+最新版本 `v0.2.0-RC2`   
 
-### v0.2.0-RC1
+### [v0.2.0-RC2](https://github.com/TaleLin/lin-cms-spring-boot/compare/v0.2.0-RC1...v0.2.0-RC2)
+1. `A` 新增book表的创建sql 
+2. `A` 新增日志文件大小限制
+3. `F` 修复当 refresh token 损坏时 code 码指定错误的问题
+4. `F` 常量命令修改为全大写
+5. `F` 为数据源账号密码配置添加双引号
+6. `F` 修复行为日志搜索全部人员无结果的问题
+
+### [v0.2.0-RC1](https://github.com/TaleLin/lin-cms-spring-boot/compare/sleeve-0.1.1...v0.2.0-RC1)
 1. `U` 将 `application-*.properties`配置文件改为`yml`格式
 2. `U` 重构 Uploader 实例注入方式
 3. `A` 新增代码生成器`src/test/java/CodeGenerator.java`
