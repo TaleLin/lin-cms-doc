@@ -62,16 +62,19 @@ mvn install -Dmaven.test.skip=true
 找到`/src/main/resources/application-dev.properties`配置文件，并在其中修改你开发
 环境的数据库配置：
 
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/lin-cms?useSSL=false&serverTimezone=UTC&characterEncoding=UTF8
-spring.datasource.username=root
-spring.datasource.password=123456
+```yml
+spring:
+  # 数据源配置，请修改为你项目的实际配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/lin-cms?useSSL=false&serverTimezone=UTC&characterEncoding=UTF8
+    username: "root"
+    password: "123456"
 ```
 
 ## 运行
 
 ```bash
-java -jar target/latticy-0.1.1-RC1.jar
+java -jar target/latticy-0.2.0-RC2.jar
 ```
 
 ## 完成
@@ -91,11 +94,13 @@ curl http://localhost:5000/
 :::tip
 
 在默认的开发环境中，我们是关闭权限系统的，这可能会导致部分接口和功能不能使用，如果
-你需要和前端对接，请在`/src/main/resources/application-dev.properties`配置
+你需要和前端对接，请在`/src/main/resources/application-dev.yml`配置
 文件中开启权限拦截，如下：
 
-```properties
-auth.enabled=true
+```yml
+# 开启权限拦截
+auth:
+  enabled: true
 ```
 
 :::
