@@ -6,20 +6,13 @@ title: 起步
 
 本小节将以最快、最便捷的方式教你如何启动 lin-cms 。
 
-:::warning
-
-目前 lin-cms-spring-boot 仍处于测试状态，不建议使用在生产环境。
-
-:::
-
 ## 依赖
 
 - JDK1.8+，已在 JAVA8、9、11 上测试通过。
 - MySQL5.6+，确保你有可用的数据库环境。
 - Maven3.6+，依赖、打包需要它。
 
-lin-cms 依赖于 spring-boot 和 mybatis，你如果不满足看一看，那么请一定要有一定的
-基础。
+lin-cms 依赖于 spring-boot 和 mybatis，如果你还不满足技术储备，那么请一定先去学习下。
 
 ## 获取项目
 
@@ -27,9 +20,7 @@ lin-cms 依赖于 spring-boot 和 mybatis，你如果不满足看一看，那么
 git clone https://github.com/TaleLin/lin-cms-spring-boot.git latticy
 ```
 
-> 此处我们以 latticy 作为工程名，当然你也可以以任意你喜爱的名字作为工程名。如果 你
-> 想以某个版本，如 0.0.1 版，作为起始项目，那么请在 github 上的版本页下载相应 的
-> 版本即可。
+> 此处我们以 `latticy` 作为工程名，当然你也可以以任意你喜爱的名字作为工程名。如果你想以某个指定版本（如 0.0.1 版）作为起始项目，那么请在 github 上的[版本页](https://github.com/TaleLin/lin-cms-spring-boot/releases)下载相应的版本即可。
 
 ## 安装依赖
 
@@ -51,16 +42,13 @@ mvn install -Dmaven.test.skip=true
 
 在你的开发环境 RDBMS 中，新建一个数据库，如 `lin-cms`。
 
-然后找到目录下的`/src/main/resources/schema.sql`文件，并在 MySQL 中执行该脚本文
-件。
+然后找到目录下的`/src/main/resources/schema.sql`文件，并在 MySQL 中执行该脚本文件。
 
-推荐你使用 navicat 等数据库工具导入并执行脚本文件，如果你熟悉 mysql 客户端工具，
-也可使用它导入数据。
+推荐你使用 navicat 等数据库工具导入并执行脚本文件，如果你熟悉 mysql 客户端工具，也可使用它导入数据。
 
 ### 更改配置
 
-找到`/src/main/resources/application-dev.properties`配置文件，并在其中修改你开发
-环境的数据库配置：
+找到`/src/main/resources/application-dev.yml`配置文件，并在其中修改你开发环境的数据库配置：
 
 ```yml
 spring:
