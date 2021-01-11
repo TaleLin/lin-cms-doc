@@ -160,12 +160,13 @@ curl http://localhost:5000/v1/book/search\?q\=c
 
 很不幸，没有任何日志被数据库记录。Logger 的使用依赖于权限系统，因为记录日志是针对用户而言的，如果连用户都没有，那记录的日志也没有意义。
 
-因此我们还得为 searchBook 添加上相应的 RouteMeta 和 LoginRequired 注解（更推荐使用合并注解 `LoginMeta`）。如下：
+因此我们还得为 searchBook 添加上相应的 @RouteMeta 和 @LoginRequired 注解。如下：
 
 ```java
 public class BookController {
     @GetMapping("/search")
-    @LoginMeta(permission = "搜索图书", module = "图书", mount = true)
+    @LoginRequired
+    @RouteMeta(permission = "搜索图书", module = "图书", mount = true)
     @Logger(template = "{user.nickname}搜索的一本书")
     public List<BookDO> searchBook(@RequestParam(value = "q", required = false, defaultValue = "") String q) {
         List<BookDO> books = bookService.getBookByKeyword("%" + q + "%");

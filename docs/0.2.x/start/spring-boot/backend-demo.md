@@ -11,7 +11,7 @@ title: 后端快速上手
 上沉淀下来的最佳实践，我们为你准备了丰富和实用的工具和库，帮助你在最少的时间里获
 得最大的便利。
 
-请确保你已经从`github`或其它途径上获取了`lin-cms-java`的模板项目。
+请确保你已经从`github`或其它途径上获取了`lin-cms-spring-boot`的模板项目。
 
 > 注意：本小节建立在你有一定 spring-boot、spring-mvc 和 mybatis 的基础上。
 

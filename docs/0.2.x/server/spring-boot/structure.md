@@ -68,7 +68,7 @@ title: 架构
 - `core`：全名 lin-cms-core，其实就是一堆基础类库，方便我们进行业务开发。
 - `starter`：全名 lin-cms-starter，其实就是 spring-boot 里面的 starter，提供自动
   装配和默认配置，但不涉及具体业务的实现。
-- `demo`：全名 lin-cms-java，也就是我们的工程项目。
+- `demo`：全名 lin-cms-spring-boot，也就是我们的工程项目。
 
 ## 功能点
 
