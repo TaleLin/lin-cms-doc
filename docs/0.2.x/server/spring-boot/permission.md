@@ -176,15 +176,16 @@ public DeletedVO deleteBook(@PathVariable("id") @Positive(message = "{id}") Long
 能够访问它，因此第二个注解 `GroupRequired`上场了，它表示`deleteBook`这个接口，必
 须由 **拥有删除图书这个权限的分组** 才能访问。
 
-可能，你还对 GroupRequired 不甚理解，没关系，下面我们再会详细介绍到它。另外考虑到`GroupRequired`注解与`RouteMeta`注解经常会一同使用的场景，我们提供了这两个注解的合并注解`GropuMeta`，其参数与`RouteMeta`一致。
+可能，你还对 GroupRequired 不甚理解，没关系，下面我们再会详细介绍到它。
 
 我们运行代码，看权限系统是不是起作用了，由于我们在开发环境，权限拦截默认是关闭的
-，因此我们还需要开启它。打开`src/main/resources/application-dev.properties`，在
+，因此我们还需要开启它。打开`src/main/resources/application-dev.yml`，在
 里面修改`auth.enabled`的值为 true：
 
-```properties
+```yml
 # 开启权限拦截
-auth.enabled=true
+auth:
+  enabled: true
 ```
 
 随后运行：
@@ -265,57 +266,7 @@ curl -H 'Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZGVudGl0e
 
 lin-cms 默认只有一个管理员分组，即 root 分组，且 root 分组只有一个用户——root，用户新建时若无特殊特定默认在 guest 分组中。
 
-当然关 root 分组、root 用户和 guest 分组，你如果需要调整它，可以在`src/main/resources/application.properties`配置文件中修改它们：
-
-```properties
-# 默认的权限分组id和名称配置
-# 默认root分组名称为 root
-group.root.name=root
-# 默认root分组id为 1
-group.root.id=1
-# 默认游客分组名称为 guest
-group.guest.name=guest
-# 默认游客分组id 为 2
-group.guest.id=2
-# 默认 root 用户id为 1
-user.root.id=1
-# 默认 root 用户 用户名 为 root
-user.root.username=root
-# 默认 root 用户 昵称 为 root
-user.root.nickname=root
-```
-
-你也必须修改你数据库相应的数据，你可以在`src/main/resources/schema.sql`文件中，
-更改需要的插入数据：
-
-```sql
--- ----------------------------
--- 插入超级管理员
--- 插入root分组
--- ----------------------------
-BEGIN;
-
-INSERT INTO lin_user(id, username, nickname)
-VALUES (1, 'root', 'root');
-
-INSERT INTO lin_user_identity (id, user_id, identity_type, identifier, credential)
-VALUES (1, 1, 'USERNAME_PASSWORD', 'root',
-        'pbkdf2sha256:64000:18:24:n:yUnDokcNRbwILZllmUOItIyo9MnI00QW:6ZcPf+sfzyoygOU8h/GSoirF');
-
-INSERT INTO lin_group(id, name, info)
-VALUES (1, 'root', '超级用户组');
-
-INSERT INTO lin_group(id, name, info)
-VALUES (2, 'guest', '游客组');
-
-INSERT INTO lin_user_group(id, user_id, group_id)
-VALUES (1, 1, 1);
-
-COMMIT;
-```
-
-这是一些比较危险的操作，我们不推荐你更改，如果你觉得 lin-cms 权限系统无法满足你
-的业务需求，可以尝试去更改它。
+目前更改默认分组和用户需要修改项目源码，这是一些比较危险的操作，我们不推荐你更改，如果你觉得 lin-cms 权限系统无法满足你的业务需求，可以尝试去更改它。
 
 ## 总结
 

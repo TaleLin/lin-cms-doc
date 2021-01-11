@@ -4,14 +4,11 @@ title: 后端快速上手
 
 # 后端快速上手
 
-本小节我们将在`lin-cms`的基础上开发一个简单的图书 demo，帮助大家来熟悉和入
-门`lin-cms`。
+本小节我们将在`lin-cms`的基础上开发一个简单的图书 demo，帮助大家来熟悉和入门`lin-cms`。
 
-`lin-cms`的是一个 lin 团队经数次打磨的模板项目，是我们团队在`spring-boot`的基础
-上沉淀下来的最佳实践，我们为你准备了丰富和实用的工具和库，帮助你在最少的时间里获
-得最大的便利。
+`lin-cms`的是一个经数次打磨的模板项目，是我们林间有风团队在`spring-boot`的基础上沉淀下来的最佳实践，我们为你准备了丰富和实用的工具和库，帮助你在最少的时间里获得最大的便利。
 
-请确保你已经从`github`或其它途径上获取了`lin-cms-java`的模板项目。
+请确保你已经从`github`或其它途径上获取了`lin-cms-spring-boot`的模板项目。
 
 > 注意：本小节建立在你有一定 spring-boot、spring-mvc 和 mybatis 的基础上。
 
@@ -40,18 +37,13 @@ INSERT INTO book(`title`, `author`, `summary`, `image`) VALUES ('深入理解计
 INSERT INTO book(`title`, `author`, `summary`, `image`) VALUES ('C程序设计语言', '（美）Brian W. Kernighan', '在计算机发展的历史上，没有哪一种程序设计语言像C语言这样应用广泛。本书原著即为C语言的设计者之一Dennis M.Ritchie和著名计算机科学家Brian W.Kernighan合著的一本介绍C语言的权威经典著作。', 'https://img3.doubanio.com/lpic/s1106934.jpg');
 ```
 
-`book`除了`id`、`title（标题）`和`summary（概述）`等基本信息外，还
-有`create_time`和`update_time`等额外数据，它们的类型是`datetime`，至于它们的用处
-，我们将在下面一一展开。
+`book`除了`id`、`title（标题）`和`summary（概述）`等基本信息外，还有`create_time`和`update_time`等额外数据，它们的类型是`datetime`，至于它们的用处，我们将在下面一一展开。
 
 请现在你的数据库中执行上面的`SQL`脚本，后面的所有操作均依赖与它。
 
 ## 模型层
 
-数据库有了`book`数据表以后，我们需要在代码中添加上与之对应的模型，一般而言如果某
-个类用来表示数据模型，那么该类就是比较单纯的数据容器（Data Object），我们简
-称`DO`，因此我们在`src/main/java/io/github/talelin/latticy/model` 路径下，新建一个
-名为`BookDO.java`的模型类。
+数据库有了`book`数据表以后，我们需要在代码中添加上与之对应的模型，一般而言如果某个类用来表示数据模型，那么该类就是比较单纯的数据容器（Data Object），我们简称`DO`，因此我们在`src/main/java/io/github/talelin/latticy/model` 路径下，新建一个名为`BookDO.java`的模型类。
 
 ```java
 package io.github.talelin.latticy.model;
@@ -92,11 +84,9 @@ public class BookDO {
 }
 ```
 
-`BookDO`是与`book`表对应的模型类，它的每个属性都与数据表字段对应，我们还需要
-为`BookDO`添加上`TableName`注解，注解中的`book`值是数据库中表的名称。
+`BookDO`是与`book`表对应的模型类，它的每个属性都与数据表字段对应，我们还需要为`BookDO`添加上`TableName`注解，注解中的`book`值是数据库中表的名称。
 
-更加重要的是，我们需要给主键 id 打上`TableId`注解，`value`值就是数据表中主键对应
-的名称，`type`则表示该主键类型。
+更加重要的是，我们需要给主键 id 打上`TableId`注解，`value`值就是数据表中主键对应的名称，`type`则表示该主键类型。
 
 接下来，我们来详细说明一下三个日期类型的字段：
 
@@ -104,10 +94,9 @@ public class BookDO {
 - updateTime 用来表示 book 被更新时所记录的时间
 - deleteTime 用来表示 book 被删除的时间
 
-我们分别为这三个字段都打上了`JsonIgnore`注解，是为了在 json 序列化的时候忽略它们
-。
+我们分别为这三个字段都打上了`@JsonIgnore`注解，是为了在 json 序列化的时候忽略它们。
 
-`TableLogic`是 mybatis-plus 提供的逻辑删除（软删除）注解，有了该注解后，当你调用
+`@TableLogic`是 mybatis-plus 提供的逻辑删除（软删除）注解，有了该注解后，当你调用
 API 删除某个 book 的时候，并不会真正的删除 book，而是将`deleteTime`设置为删除时间。
 
 ## 业务层
@@ -115,8 +104,7 @@ API 删除某个 book 的时候，并不会真正的删除 book，而是将`dele
 按照 mybatis 的惯例，有了数据模型以后，我们还需要为它提供相应的`mapper`。
 
 我们分别
-在`src/main/java/io/github/talelin/latticy/mapper`和`src/main/resources/mapper` 下
-新建`BookMapper.java`文件和`BookMapper.xml`文件。
+在`src/main/java/io/github/talelin/latticy/mapper`和`src/main/resources/mapper` 下新建`BookMapper.java`文件和`BookMapper.xml`文件。
 
 BookMapper.java:
 
@@ -135,9 +123,7 @@ public interface BookMapper extends BaseMapper<BookDO> {
 }
 ```
 
-这里我们继承 mybatis-plus 的`BaseMapper`，BaseMapper 可以让我们的 BookMapper 默认就拥有
-很多好用使用的 API，并给 BookMapper 打上了`Repository`注解，方便 spring-boot
-识别。
+这里我们继承 mybatis-plus 的`BaseMapper`，BaseMapper 可以让我们的 BookMapper 默认就拥有很多好用使用的 API，并给 BookMapper 打上了`@Repository`注解，将数据访问层的`Java Bean`加入到了 Spring 容器中。
 
 BookMapper.xml:
 
@@ -159,15 +145,13 @@ BookMapper.xml:
 </mapper>
 ```
 
-在 BookMapper.xml 文件中，我们定义了基础了映射，即模型（BookDO）与数据表的映射，
-方便后续使用。
+在 BookMapper.xml 文件中，我们定义了基础了映射，即模型（BookDO）与数据表的映射，方便后续使用。
 
 有了基础 Mapper 以后，我们再为 book 定义相关的业务接口和业务实现。
 
 我们分别
 在`src/main/java/io/github/talelin/latticy/service`和`src/main/java/io/github/talelin/latticy/service/impl`
-下新建`BookService.java`文件和`BookServiceImpl.java`文件，其中 BookServiceImpl
-是 BookService 的实现。
+下新建`BookService.java`文件和`BookServiceImpl.java`文件，其中 BookServiceImpl 是 BookService 的实现类。
 
 ```java
 package io.github.talelin.latticy.service;
@@ -188,14 +172,13 @@ public class BookServiceImpl implements BookService {
 }
 ```
 
-在`BookServiceImpl`上，我们打上了`Service`注解表示它是一个业务层类。
+在`BookServiceImpl`上，我们打上了`@Service`注解表示它是一个业务层类。
 
 ## 控制层
 
 接下来，我们需要给 book 创建对应的控制器，并以此对外提供访问接口。
 
-在`src/main/java/io/github/talelin/latticy/controller/v1`下我们新
-建`BookController.java`文件：
+在`src/main/java/io/github/talelin/latticy/controller/v1`下我们新建`BookController.java`文件：
 
 ```java
 package io.github.talelin.latticy.controller.v1;
@@ -212,15 +195,15 @@ public class BookController {
 }
 ```
 
-`RestController`注解表示 BookController 是控制器类，其遵循 Rest 风格
-，`RequestMapping`指定 BookController 的`url`前缀。
+`@RestController`注解表示 BookController 是控制器类，其遵循 Rest 风格
+，`@RequestMapping`注解指定 BookController 的`url`前缀。
 
 ## getById 接口实现
 
 有了上面的基础后，我们再来完成 API 接口，首先我们需要为 BookController 添加一
 个`getBook`接口，让前端通过`id`可以获取后端的`book`数据，即：
 
-```java
+```java{3,6,13,16-19}
 package io.github.talelin.latticy.controller.v1;
 
 import io.github.talelin.latticy.model.BookDO;
@@ -243,12 +226,9 @@ public class BookController {
 }
 ```
 
-我们为`getBook`接口添加了基础代码，`GetMapping`注解指定该接口需要 GET 方法请求，
-且请求路径为`/{id}`，注意`id`为变量，是路径变量，因此可通过`PathVariable`修饰
-的`Long id`值来得到该变量值。
+我们为`getBook`接口添加了基础代码，`GetMapping`注解指定该接口需要 GET 方法请求，且请求路径为`/{id}`，注意`id`为变量，是路径变量，因此可通过`@PathVariable`注解注释的`Long id`值来得到该变量值。
 
-同时我们也为`id`添加上了一个校验注解，即`Positive`，规定`id`必须是正整数，并在
-BookController 上添加上了`Validated`注解，这样该校验才会生效。
+同时我们也为`id`添加上了一个校验注解，即`@Positive`，规定`id`必须是正整数，并在BookController 上添加上了`@Validated`注解，这样该校验才会生效。
 
 `getBook`返回`BookDO`，目前我们未实现具体业务，让其返回`null`。
 
@@ -292,18 +272,16 @@ public class BookServiceImpl implements BookService {
 }
 ```
 
-`getById`的实现很简单，通过`BookMapper`实例来传入图书 id，调用`selectById`方法即
-可查询数据库得到 book 数据。
+`getById()`的实现很简单，通过`BookMapper`实例来传入图书 id，调用`selectById()`方法即可查询数据库得到 book 数据。
 
 注意：BookMapper 因为继承了 BaseMapper，所以它默认就具有大量的方法，其中就包括
 selectById。
 
-这里的`bookMapper`是通过 spring 的依赖注入来实现的，所以会有`Autowired`注解来修
-饰它。
+这里的`bookMapper`是通过 spring 的依赖注入来实现的，所以要用`@Autowired`注解来标记它。
 
 完成了业务层以后，我们再返回控制层完善代码：
 
-```java
+```java{6,18,19,23,24}
 package io.github.talelin.latticy.controller.v1;
 
 import io.github.talelin.latticy.model.BookDO;
@@ -332,8 +310,7 @@ public class BookController {
 }
 ```
 
-我们修改了刚才的 BookController，通过`Autowired`注解我们也拿到了`bookService`实
-例，并在 getBook 函数中调用了它的`getById`方法，并返回 book。
+我们修改了刚才的 BookController，通过`@Autowired`注解我们也拿到了`bookService`实例，并在 getBook 函数中调用了它的`getById()`方法，并返回 book。
 
 我们可以测试一下这个接口：
 
@@ -365,17 +342,13 @@ curl localhost:5000/v1/book/1
 
 ## 完善异常
 
-我们的应用目前已经可以顺利的获得图书数据了，试想一下如果如果前端的参数不规范，传
-入`1ll`这样的 id 参数，那该怎么办了？
+我们的应用目前已经可以顺利的获得图书数据了，试想一下如果如果前端的参数不规范，例如传入了`1ll`这样的 id 参数，那该怎么办呢？
 
-不用担心，我们已经通过`@Positive(message = "id必须为正整数") Long id`这样的代码
-规定 id 参数必须为正整数，若参数不符合规范，程序会给出相应的错误提示返回给前端。
+不用担心，我们已经通过`@Positive(message = "id必须为正整数") Long id`这样的代码规定 id 参数必须为正整数，若参数不符合规范，程序会给出相应的错误提示返回给前端。
 
-可是如果前端传入的 id 数据库压根没有怎么办，即`bookService.getById(id)`查询的结
-果为`null`，如果直接返回`null`给前端，那么肯定不友好，我们可以给前端一个异常提示
-，如下：
+可是如果前端传入的 id 数据库压根没有怎么办，即`bookService.getById(id)`查询的结果为`null`，如果直接返回`null`给前端，那么肯定不友好，我们可以给前端一个异常提示，如下：
 
-```java
+```java {25-27}
 package io.github.talelin.latticy.controller.v1;
 
 import io.github.talelin.autoconfigure.exception.NotFoundException;
@@ -408,8 +381,7 @@ public class BookController {
 }
 ```
 
-若`book`为`null`，我们则抛出`NotFoundException`异常，异常消息
-为`book not found`。
+若`book`为`null`，我们则抛出`NotFoundException`异常，异常消息为`未找到图书`。
 
 再次通过 curl 测试一下：
 
@@ -424,44 +396,35 @@ curl localhost:5000/v1/book/100
 { "code": 10020, "message": "未找到图书", "request": "GET /v1/book/100" }
 ```
 
-因为我们数据库中没有 id 为`100`的图书，因此我们抛出了一个 NotFoundException 的异
-常，lin-cms 有专门的异常处理机制来处理该异常，然后返回给前端一个清晰的异常信息。
+因为我们数据库中没有 id 为`100`的图书，因此我们抛出了一个 NotFoundException 的异常，lin-cms 有专门的异常处理机制来处理该异常，然后返回给前端一个清晰的异常信息。
 
 在这个异常信息中有三个重要字段，我们来分别说明一下：
 
-- code 字段：消息码，用来唯一标识一条消息，你可以把它理解为`未找到图书`这条消息
-  的 id
-- message 字段：消息体，用来表示异常消息，如 `未找到图书`
-- request 字段：请求信息，告诉请求者，是哪一个请求发生了异常，方便前端排查
+- **code 字段**：消息码，用来唯一标识一条消息，你可以把它理解为`未找到图书`这条消息的 id
+- **message 字段**：消息体，用来表示异常消息，如 `未找到图书`
+- **request 字段**：请求信息，告诉请求者，是哪一个请求发生了异常，方便前端排查
 
 如果你的应用对`国际化`没有要求，那么此时你的异常处理其实已经足够了。
 
-注意：大部分人其实已经足够了。但是，你真的需要国际化或者想要更加人性化的异常信息处理，
-那么这样的异常信息是不够好的。
+注意：大部分人其实已经足够了。但是，你真的需要国际化或者想要更加人性化的异常信息处理，那么这样的异常信息是不够好的。
 
-我们把`未找到图书`这样的异常消息硬编码进了异常类中，如果在后面的开发中需要更改它
-，那么你可能会花上一番功夫来找它了，因此我们提供了配置文件的机制来更改异常消息。
+我们把`未找到图书`这样的异常消息硬编码进了异常类中，如果在后面的开发中需要更改它，那么你可能会花上一番功夫来找它了，因此我们提供了配置文件的机制来更改异常消息。
 
 或许你已经猜到了，`code`既然用来唯一标识一条异常信息，那么肯定有它的作用。
 
-我们给`未找到图书`这条异常信息重新定义一个 code 码，记住每一条信息都对应一个
-code，如果你的异常信息是新的，那么肯定需要重新定义一个 code 码，且不能覆盖原来已
-经存在的 code 码。
+我们给`未找到图书`这条异常信息重新定义一个 code 码，记住每一条信息都对应一个code，如果你的异常信息是新的，那么肯定需要重新定义一个 code 码，且不能覆盖原来已经存在的 code 码。
 
-code 码的定义在`src/main/resources/code.properties`配置文件中，如我们
-为`未找到图书`定义消息码为`10022`：
+code 码的定义在`src/main/resources/code-message.properties`配置文件中，如我们为`未找到图书`定义消息码为`10022`：
 
 ```properties
 code-message[10022]=未找到相关书籍
 ```
 
-code-message 是一个哈希表配置，不同的 code 码对应不同的异常信息，当然 code 码的
-定义是需要符合规范的， lin-cms 规定若 code 码大于`10000`，如`10022`表示对应的消
-息是异常消息，如果小于`10000`表示该消息是正常的消息，如`0`表示成功。
+code-message 是一个哈希表配置，不同的 code 码对应不同的异常信息，当然 code 码的定义是需要符合规范的， lin-cms 规定若 code 码大于`10000`，如`10022`表示对应的消息是**异常**消息，如果小于`10000`表示该消息是**正常**的消息，例如`1`表示创建成功。
 
 配置完毕后，我们再改善一下我们的 BookController 代码，如下：
 
-```java
+```java{26}
 package io.github.talelin.latticy.controller.v1;
 
 import io.github.talelin.autoconfigure.exception.NotFoundException;
@@ -494,8 +457,7 @@ public class BookController {
 }
 ```
 
-我们替换了`NotFoundException`中的默认异常信息，将其改成了英文，因为默认的异常信
-息绝大多数都是英文，并且传入了我们刚才所定义的`code`码——10022。
+我们替换了`NotFoundException`中的默认异常信息，将其改成了英文，因为默认的异常信息绝大多数都是英文，并且传入了我们刚才所定义的`code`码——10022。
 
 再次运行：
 
@@ -510,8 +472,8 @@ curl localhost:5000/v1/book/100
 { "code": 10022, "message": "未找到相关书籍", "request": "GET /v1/book/100" }
 ```
 
-可以看到，及时 NotFoundException 中的异常信息是英文，但返回给前端的异常信息却是中文，
-且与我们刚在在`code.properties`中的配置一致。
+可以看到，即使 NotFoundException 中的异常信息是英文，但返回给前端的异常信息却是中文，且与我们刚在在`code-message.properties`中的配置一致。  
+由此可以得出 —— lin cms 约定配置文件中配置的异常信息的优先级始终大于异常类构造方法传参的优先级。
 
 当然如果你偷懒或者觉得这样做没有实际的收益，完全可以直接硬编码成中文。
 
@@ -519,7 +481,7 @@ curl localhost:5000/v1/book/100
 
 接下来，我们为了图书新增一个接口——创建图书。
 
-```java
+```java{8,33-36}
 package io.github.talelin.latticy.controller.v1;
 
 import io.github.talelin.autoconfigure.exception.NotFoundException;
@@ -559,8 +521,7 @@ public class BookController {
 }
 ```
 
-我们在 BookController 中新增了一个 createBook 方法，且通过`PostMapping`注解暴露
-这个接口，请求方法为`POST`，请求路径为`/v1/book`。
+我们在 BookController 中新增了一个 createBook() 方法，且通过`PostMapping`注解暴露这个接口，请求方法为`POST`，请求路径为`/v1/book`。
 
 createBook 方法返回一个`CreatedVO`的对象，这个对象是 lin-cms 提供的创建成功响应对象，该对象其实与刚才的异常信息体一致，即：
 
@@ -574,7 +535,7 @@ createBook 方法返回一个`CreatedVO`的对象，这个对象是 lin-cms 提�
 
 :::tip
 
-createBook 方法还可以返回一个`UnifyResponseVO`的对象，可以通过`ResponseUtil`帮助类来帮助你迅速地创建该对象，例如用于表示创建成功`generateCreatedResponse`方法，你只需传入`message`参数即可。  
+createBook() 方法还可以返回一个`UnifyResponseVO`的对象，可以通过`ResponseUtil`帮助类来帮助你迅速地创建该对象，例如用于表示创建成`generateCreatedResponse`方法，你只需传入`message`参数即可。  
 当然，虽说 lin-cms 提供了两种方法来生成成功响应对象，我们更推荐代码中使用`CreatedVO`、`UpdatedVO`以及`DeletedVO`，这样代码更简洁明了，更具可读性。
 
 :::
@@ -596,14 +557,11 @@ curl -XPOST localhost:5000/v1/book
 { "code": 1, "message": "新建图书成功", "request": "POST /v1/book" }
 ```
 
-你可以发现，此处的响应内容与上面的异常结果几乎一致，当然也遵循我们的规范，如果返
-回的是正常信息，那么 code 码必须小于`10000`。
+你可以发现，此处的响应内容与上面的异常结果几乎一致，当然也遵循我们的规范，如果返回的是正常信息，那么 code 码必须小于`10000`。
 
-我们还需完善我们的接口，首先接口需要从请求体中读取新建图书的数据，其次对于图书的
-数据我们需要做检验，不能让不合法数据进来。
+我们还需完善我们的接口，首先接口需要从请求体中读取新建图书的数据，其次对于图书的数据我们需要做检验，不能让不合法数据进来。
 
-我们在`src/main/java/io/github/talelin/dto`下新建包`book`，并在新建的 book 包下
-新建`CreateOrUpdateBookDTO.java`文件：
+我们在`src/main/java/io/github/talelin/dto`下新建包`book`，并在新建的 book 包下新建`CreateOrUpdateBookDTO.java`文件：
 
 如下：
 
@@ -636,14 +594,11 @@ public class CreateOrUpdateBookDTO {
 ```
 
 我们把有关于数据传输的数据容器类称之
-为`DTO（Data Transfrom Object）`，CreateOrUpdateBookDTO 共有 4 个字段，分别对于
-book 其中的 4 个字段，且每个字段都有对于校验注解，如`NotEmpty`，虽然这些注解都有
-默认校验异常信息，不过我们推荐你为每一个校验注解都定义上与之相符的`message`，给
-前端更加友好的提示。
+为`DTO（Data Transfrom Object）`，CreateOrUpdateBookDTO 共有 4 个字段，分别对应 book 表中的 4 个字段，且每个字段都有对于校验注解，如`@NotEmpty`，虽然这些注解都有默认校验异常信息，不过我们推荐你为每一个校验注解都定义上与之相符的`message`，给前端更加友好的提示。
 
 有了该类后，我们再来完善 BookController 和 BookService，如下：
 
-```java
+```java{5,35,36}
 package io.github.talelin.latticy.controller.v1;
 
 import io.github.talelin.autoconfigure.exception.NotFoundException;
@@ -685,10 +640,10 @@ public class BookController {
 }
 ```
 
-为 CreateOrUpdateBookDTO 打上了`RequestBody`（从请求体中读数据）和`Validated`（
+为 CreateOrUpdateBookDTO 打上了`@RequestBody`（从请求体中读数据）和`@Validated`（
 校验请求体）注解。
 
-```java
+```java{3,10}
 package io.github.talelin.latticy.service;
 
 import io.github.talelin.latticy.dto.book.CreateOrUpdateBookDTO;
@@ -702,7 +657,7 @@ public interface BookService {
 }
 ```
 
-```java
+```java{3,22-30}
 package io.github.talelin.latticy.service.impl;
 
 import io.github.talelin.latticy.dto.book.CreateOrUpdateBookDTO;
@@ -752,8 +707,7 @@ curl -XPOST -H 'Content-Type:application/json' -d '{"title":"大江东去","auth
 
 ## 总结
 
-在本小节中，我们为图书应用添加了两个基础的 API 接口，并探讨了异常信息的规范、配
-置化和国际化。
+在本小节中，我们为图书应用添加了两个基础的 API 接口，并探讨了异常信息的规范、配置化和国际化。
 
 本节涉及内容比较多，需要你花费一定的时间消化，当然如果你十分熟悉 spring-boot 和
 spring-mvc，完全可以走马观花的阅读本节。
