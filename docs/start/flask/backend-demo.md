@@ -116,7 +116,7 @@ class Book(InfoCrud):
     image = Column(String(100))
 ```
 
-这是已经完成的 `Book` Model，该模型继承自 `InfoCrud`，有关于 `InfoCrud` 的详细，将在[后续](../server/authority_and_models.md##InfoCrud和BaseCrud)详细介绍，本章我们注重于 CMS 的开发使用。
+这是已经完成的 `Book` Model，该模型继承自 `InfoCrud`，有关于 `InfoCrud` 的详细，将在[后续](../../server/flask/authority_and_models.md##InfoCrud和BaseCrud)详细介绍，本章我们注重于 CMS 的开发使用。
 
 下面，我们继续完善 `app/api/v1/book.py` 下的 `get_book` 函数，在上一步中，我们只是简单的返回了一条信息，但是在真正的开发中，数据库几乎是任何应用都摆脱不了的一环。
 
@@ -276,10 +276,10 @@ def search_book():
 
 ```python
 class BookSchema(BaseModel):
-title: str
-author: str
-image: str
-summary: str
+    title: str
+    author: str
+    image: str
+    summary: str
 ```
 
 在`app/api/v1/book.py`中追加:
@@ -336,7 +336,7 @@ def delete_book(id: int):
         # 删除图书，软删除
         book.delete(commit=True)
         return Success(14)
-    raise NotFound(10020
+    raise NotFound(10020)
 ```
 
 - 获取所有图书
@@ -349,7 +349,7 @@ def get_books():
     """
     获取图书列表
     """
-    return Book.get(one=False
+    return Book.get(one=False)
 ```
 
 我们完成了一个关于图书 CRUD 的简单 demo，事实上很多应用都是重复如此操作，希望你能熟练掌握这套流程。
@@ -370,7 +370,7 @@ def get_books():
 | /v1/book/       |     获取所有图书      |  GET   |
 
 - 使用 Model 层创建和查询数据
-- 使用 WTForms 来校验参数
+- 使用 Pydantic 来校验参数
 - 继承 APIException 来自定义异常
 
 当然在本章中，我们只是一个快速上手的指导，如果你熟悉 `Flask` 及其生态，那么你完全可以按照此种模式开发自己的应用，[后续](../server/README.md)我们会讨论项目开发的基础约定和流程。
