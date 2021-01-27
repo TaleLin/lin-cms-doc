@@ -214,7 +214,7 @@ def get_book(id):
 我们新建 `app/validators/book.py` 文件，向其中*添加*如下内容：
 
 ```python
-from lin import BaseModel
+from lin.apidoc import BaseModel
 
 class BookQuerySearchSchema(BaseModel):
     q: str
@@ -229,7 +229,7 @@ class BookQuerySearchSchema(BaseModel):
 ```python
 from app.validator.book import BookQuerySearchSchema
 from flask import g
-from app.api import api
+from lin.apidoc import api
 
 @book_api.route('/search', methods=['GET'])
 # 使用校验，需要引入定义好的对象`api`,它是Spectree的一个实例
