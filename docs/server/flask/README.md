@@ -28,12 +28,17 @@ title: 项目结构及开发规范
 │   │   ├── __init__.py
 │   │   ├── cms // 开发CMS API目录
 │   │   └── v1 // 开发业务 API目录
-│   ├── assets // 本地上传文件存放目录
 │   ├── cli // flask cli 模块
 │   │   ├── __init__.py
 │   │   ├── db // 数据库 cli 模块
 │   │   └── plugin // 插件 cli 模块
 │   ├── config // 配置模块
+│   │   ├── __init__.py
+│   │   ├── base.py // 基础配置类
+│   │   ├── development.py // 开发环境配置类
+│   │   ├── production.py // 生产环境配置类
+│   │   ├── code_message.py // 消息码配置
+│   │   └── http_status_desc // apidoc UI文档http描述
 │   ├── exception //自定义异常模块
 │   │   ├── __init__.py
 │   │   └── api.py // 自定义API异常
@@ -53,6 +58,7 @@ title: 项目结构及开发规范
 │       └── schema.py  // 数据校验模型类
 ├── gunicorn.conf.py // gunicorn 部署配置文件
 ├── logs // 运行日志
+├── assets // 静态文件目录
 ├── requirements-dev.txt // 开发环境依赖
 ├── requirements-prod.txt // 生产环境依赖
 ├── starter.py // 程序入口文件

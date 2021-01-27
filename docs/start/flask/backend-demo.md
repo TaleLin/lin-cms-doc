@@ -143,7 +143,7 @@ def get_book(id):
 >
 > 现在，直接返回数据库的模型实例，也可以在返回响应时被自动序列化了。
 >
-> 异常类允许直接传入告警文字或数字作为参数，新版本的异常新增了多项功能，我们将在[异常](../server/exceptin.md)详细介绍。
+> 异常类允许直接传入告警文字或数字作为参数，新版本的异常新增了多项功能，我们将在[异常](../../server/flask/exception.md)详细介绍。
 
 在上面重写的 `book.py` 文件中，我们使用到了 `flask-sqlalchemy` 提供的便捷查询 API，详细使用请参考[官网](http://flask-sqlalchemy.pocoo.org/2.3/)。
 
