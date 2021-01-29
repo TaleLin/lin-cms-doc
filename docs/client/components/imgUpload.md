@@ -116,6 +116,8 @@ const initData = [{
 |    height     |    Number    | null |                                             高度必需等于                                              |
 |   minWidth    |    Number    | null |                                                最小宽                                                 |
 |   minHeight   |    Number    | null |                                                最小高                                                 |
+|   maxWidth    |    Number    | null |                                                最大宽                                                 |
+|   maxHeight   |    Number    | null |                                                最大高                                                 |
 |    minSize    |    Number    | null |                                            最小 size（Mb）                                            |
 |    maxSize    |    Number    | null |                                            最大 size（Mb）                                            |
 | allowAnimated |    Number    | null | 是否允许上传动图, 0 不检测, 1 不允许动图, 2 只允许动图. 要检查此项, 需设置属性 animated-check 为 true |
