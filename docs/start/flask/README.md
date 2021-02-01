@@ -27,10 +27,10 @@ Lin 的 Server 端是基于 Python Flask 的, 所以你必须首先在自己的 
 打开您的命令行工具（terminal），在其中键入:
 
 ```bash
-git clone https://github.com/TaleLin/lin-cms-flask.git -b 0.3.x starter
+git clone https://github.com/TaleLin/lin-cms-flask.git starter
 ```
 
-> **Tips:** 当前分支不是默认分支，所以需要分支切换到`0.3.x`
+> **Tips:** 
 >
 > 我们以 `starter` 作为工程名，当然您也可以以任意您喜爱的名字作为工程名。
 >
