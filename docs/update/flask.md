@@ -4,12 +4,23 @@ title: flask日志
 
 # 更新日志
 
-最新版本 `0.2.1`   
-::: warning 注意
-目前`lin-cms-flask`对应前端`lin-cms-vue`版本的 [0.2.x](https://github.com/TaleLin/lin-cms-vue/tree/0.2.x)，请不要选错版本以免造成困扰。
-::: 
+最新版本 `0.3.0-alpha`   
 
 ## 主工程
+### 0.3.0-alpha
+#### Features
+- 权限: 支持多分组
+- 文档化：集成openapi与redoc
+- 校验：适配Pydantic ，校验输入输出模型
+- 消息码：可配置的消息码机制
+- 配置：支持多级环境变量/配置加载机制
+- 命令：新增常用数据库与插件配置命令
+####  Bug Fixes
+- Form: 修复表单验证错误
+#### ⚠ BREAKING CHANGES
+- 虚拟环境：移除项目pipenv依赖
+#### Code Refactoring
+- 重构部分单元测试代码
 
 ### 0.2.1
 1. `C` 替换 nickname 为 username，作为登录用户名，并新增用户昵称 nickname 字段。**先将 user 表中 nickname 字段替换为 username，然后，再添加一个 nickname 字段**
