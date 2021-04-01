@@ -75,6 +75,10 @@ module.exports = {
             link: '/plugins/flask/'
           },
           {
+            text: '开发规范',
+            link: '/specification/'
+          },
+          {
             text: '版本日志',
             link: '/update/'
           },
