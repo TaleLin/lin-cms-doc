@@ -8,15 +8,16 @@ title: spring-boot 日志
 
 ### [v0.2.0-RELEASE](https://github.com/TaleLin/lin-cms-spring-boot/compare/v0.2.0-RC2...master)
 
-- 修复 MyBatisPlus 分页失效的问题
-- 修复代码生成器控制器模板的 bug
-- 修复由于只在 servlet 加载时获取七牛 token 导致的文件上传时 token 过期的 bug
-- 修复删除用户接口(deleteUser) 允许删除 root 分组的用户的 bug
-- 修复升级 spring-boot 2.4.0 后导致的跨域问题
-- 修复分组下若有成员，该分组不可删除的问题
-- 修复当请求体中的 json 参数类型错误，异常拦截报错不准确的问题 
-- 移除对 hutool 的依赖
-- 将单元测试使用的 junit4 替换为junit5
+1. `A` 新增高级版代码生成器模板
+2. `F` 修复 MyBatisPlus 分页失效的问题
+3. `F` 修复代码生成器控制器模板的 bug
+4. `F` 修复由于只在 servlet 加载时获取七牛 token 导致的文件上传时 token 过期的 bug
+5. `F` 修复删除用户接口(deleteUser) 允许删除 root 分组的用户的 bug
+6. `F` 修复升级 spring-boot 2.4.0 后导致的跨域问题
+7. `F` 修复分组下若有成员，该分组不可删除的问题
+8. `F` 修复当请求体中的 json 参数类型错误，异常拦截报错不准确的问题 
+9. `U` 移除对 hutool 的依赖
+10. `U` 将单元测试使用的 junit4 替换为junit5
 
 
 ### [v0.2.0-RC2](https://github.com/TaleLin/lin-cms-spring-boot/compare/v0.2.0-RC1...v0.2.0-RC2)
