@@ -149,10 +149,10 @@ public class BookServiceImpl implements BookService {
 
 ```java
 import io.github.talelin.core.annotation.GroupRequired;
-import io.github.talelin.core.annotation.RouteMeta;
+import io.github.talelin.core.annotation.PermissionMeta;
 
 @DeleteMapping("/{id}")
-@RouteMeta(permission = "删除图书", module = "图书", mount = true)
+@PermissionMeta(permission = "删除图书", module = "图书", mount = true)
 @GroupRequired
 public DeletedVO deleteBook(@PathVariable("id") @Positive(message = "{id}") Long id) {
     BookDO book = bookService.getById(id);
@@ -164,8 +164,8 @@ public DeletedVO deleteBook(@PathVariable("id") @Positive(message = "{id}") Long
 }
 ```
 
-我们为`deleteBook`方法新增加了两个注解，一个是`RouteMeta`，它会将其修饰的方法，
-即`deleteBook`纳入到权限系统中，并接受保护。RouteMeta 共有三个参数，它们的作用如
+我们为`deleteBook`方法新增加了两个注解，一个是`PermissionMeta`，它会将其修饰的方法，
+即`deleteBook`纳入到权限系统中，并接受保护。PermissionMeta 共有三个参数，它们的作用如
 下：
 
 - permission 权限名称，如：删除图书，用来给权限命名
@@ -246,7 +246,7 @@ curl -H 'Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZGVudGl0e
 
 - 定义 API 接口，API 是权限的基本单位，但并不是每个 API 接口都需要权限，如删除图
   书这样慎重的操作需要权限。
-- 接口需要 RouteMeta 注解来将其纳入权限系统，并且需要开启`auth.enabled`配置才能
+- 接口需要 PermissionMeta 注解来将其纳入权限系统，并且需要开启`auth.enabled`配置才能
   在开启权限拦截。
 - 接口需要类似 GroupRequired 的注解来告诉 lin-cms，该接口对哪些人开启。
 
