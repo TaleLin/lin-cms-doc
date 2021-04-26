@@ -17,7 +17,7 @@ Lin CMS 采用 RESTful API 规范，每一个请求都会返回对应的 HTTP St
 ### 2.1 常见的 HTTP Status
 
 - **200** Success 
-- **201** Created 新建、更新或删除数据成功
+- **201** Created 新建资源成功
 - **401** Unauthorized 表示用户没有认证，无法进行当前操作
 - **404** Not Found 服务端没有找到请求的资源
 
