@@ -20,7 +20,6 @@ Lin 的前端是基于 Vue 的，所以你必须首先安装一些支持 Vue 的
 ```bash
 git clone https://github.com/TaleLin/lin-cms-vue.git
 ```
-**目前 Flask 版前端适配版本为 `0.2.x`，请先切换到 `0.2.x`分支。**
 
 ## 安装依赖包
 
