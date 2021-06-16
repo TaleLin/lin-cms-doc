@@ -82,7 +82,7 @@ module.exports = {
 当 config 加载所有的配置后，我们可以通过函数`getItem`获取配置，如：
 
 ```js
-import { config } = from "lin-mizar/lin/config";
+import { config } from "lin-mizar/lin/config";
 
 const count = config.getItem("countDefault");
 ```
