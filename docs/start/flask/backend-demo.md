@@ -238,7 +238,7 @@ from lin.apidoc import api
 def search_book():
     # 使用这种方式校验通过的参数将会被挂载到g的对应属性上，方便直接取用。
     q = '%' + g.q + '%' # 取出参数中的`q`参数，加`%`进行模糊查询
-    books = Book.query.filter(Book.title.like(q), delete_time==None).all() # 搜索书籍标题
+    books = Book.query.filter(Book.title.like(q), Book.delete_time==None).all() # 搜索书籍标题
     if books:
         return books
     raise NotFound('没有找到相关书籍')
