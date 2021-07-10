@@ -4,9 +4,17 @@ title: spring-boot 日志
 
 # 更新日志
 
-最新版本 `v0.2.0-RELEASE`   
+最新版本 `v0.2.1-RELEASE`   
 
-### [v0.2.0-RELEASE](https://github.com/TaleLin/lin-cms-spring-boot/compare/v0.2.0-RC2...master)
+
+### [v0.2.1-RELEASE](https://github.com/TaleLin/lin-cms-spring-boot/compare/v0.2.0-RELEASE...v0.2.1-RELEASE)
+
+1. `A` 新增 BasePageDTO 以简化接口方法的形参列表，新增查询参数绑定自定义类
+2. `A` 升级 spring-boot-starter-parent 版本号为 2.5.2，升级 lin-cms-spring-boot-starter 版本号为 0.2.0-RELEASE
+3. `F` 修复文件上传的存库步骤和上传步骤，没有在一个事务中的漏洞
+
+
+### [v0.2.0-RELEASE](https://github.com/TaleLin/lin-cms-spring-boot/compare/v0.2.0-RC2...v0.2.0-RELEASE)
 
 1. `A` 新增高级版代码生成器模板
 2. `F` 修复 MyBatisPlus 分页失效的问题

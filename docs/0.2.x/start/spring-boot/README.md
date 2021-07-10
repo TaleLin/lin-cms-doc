@@ -71,7 +71,7 @@ spring.datasource.password=123456
 ## 运行
 
 ```bash
-java -jar target/latticy-0.1.1-RC1.jar
+java -jar target/latticy-*.jar
 ```
 
 ## 完成
