@@ -4,9 +4,9 @@ title: 后端快速上手
 
 # <H2Icon /> 后端快速上手
 
-接下来，我们将开始一个简单的图书项目，来帮你熟悉整个项目的开发流程。
+接下来，我们将开始一个简单的图书项目来熟悉整个项目的开发流程。
 
-`Lin-CMS-Flask`提供的图书代码是帮助开发者熟悉框架的 demo 样例，现在你可以按如下步骤将它直接删除：
+`Lin-CMS-Flask`提供的v1目录是帮助开发者熟悉框架的 demo 样例，现在你可以按如下步骤将它直接删除：
 
 1. 删除 app/api/v1
 2. 删除 app/app.py 中的两行代码
@@ -25,20 +25,12 @@ title: 后端快速上手
 
 创建并打开 `app/api/v1` 文件夹，新建 `book.py` 文件。
 
-接着，我们从 `Lin` 从导入红图来创建 API 视图：
+接着初始化一个名为 `book_api` 的蓝图，并创建一个视图函数`get_book`：
 
 ```python
-from lin.redprint import Redprint
-```
+from flask import Blueprint
 
-而后，初始化一个名为 `book_api` 的红图，并创建一个视图函数`get_book`：
-
-:::warning
-请记住此处视图函数所代表的意思，在后续的章节中它会非常重要！！！
-:::
-
-```python
-book_api = Redprint('book')
+book_api = Blueprint("book", __name__)
 
 
 @book_api.route('/<id>', methods=['GET'])
@@ -55,19 +47,21 @@ def get_book(id):
 
 到此一个简单的图书 API 开发就实现了，但是我们此时运行程序并不能访问到该 API。我们还需要将该红图挂载到项目的默认 API 蓝图上。
 
-创建 `app/api/v1/__init__.py` 文件，向其中添加如下内容：
+创建 `app/api/v1/__init__.py` 文件，将book蓝图注册到v1蓝图上。
 
-```py
+```python
 from flask import Blueprint
+
 from app.api.v1 import book
 
 def create_v1():
-    bp_v1 = Blueprint('v1', __name__)
-    book.book_api.register(bp_v1)
+    bp_v1 = Blueprint("v1", __name__)
+    bp_v1.register_blueprint(book_api, url_prefix="/book")
     return bp_v1
+
 ```
 
-最后，在`app/app.py`中，向`app`注册 `bp_v1` 蓝图。
+最后，在`app/__init__.py`中注册此蓝图。
 
 还记得我们删除的那两行代码么，把它们写到下面的函数中：
 
@@ -101,10 +95,10 @@ flask run
 
 ## 数据库模型使用
 
-进入 `app/model/v1` 文件夹，在 `book.py` 文件中，查看以下内容：
+新建 `app/api/v1/model/__init__.py` 文件:
 
 ```py
-from lin.interface import InfoCrud
+from lin import InfoCrud
 from sqlalchemy import Column, Integer, String
 
 
@@ -122,18 +116,18 @@ class Book(InfoCrud):
 
 我们重写 `get_book` 函数，顺便引入相关依赖：
 
-```py
-from lin.redprint import Redprint
-from lin.exception import NotFound
-from app.model.v1.book import Book
+```python
+from lin import NotFound
+from flask import Blueprint
+from app.api.v1.model import Book
 
-book_api = Redprint('book')
 
+book_api = Blueprint("book", __name__)
 
 @book_api.route('/<id>')
 def get_book(id):
     # 通过Book模型在数据库中查询id=`id`, 且没有被软删除的书籍
-    book = Book.query.filter_by(id=id, delete_time=None).first()
+    book = Book.query.filter_by(id=id, is_deleted=False).first()
     if book:
         return book # 如果存在，返回该数据的信息
     raise NotFound('没有找到相关书籍') # 如果书籍不存在，返回一个异常给前端
@@ -209,12 +203,10 @@ def get_book(id):
 
 路径参数可以由 Flask 帮助校验，那其他种类参数如何校验呢？
 
-> **Tips:** > `WTForms`参数校验，暂时请参考 0.2.x 版本的文档，当前文档先补充使用`Pydantic`进行参数校验的方法。
-
-我们新建 `app/validators/book.py` 文件，向其中*添加*如下内容：
+我们新建 `app/api/v1/schema/__init__.py` 文件，向其中*添加*如下内容：
 
 ```python
-from lin.apidoc import BaseModel
+from lin import BaseModel
 
 class BookQuerySearchSchema(BaseModel):
     q: str
@@ -227,18 +219,19 @@ class BookQuerySearchSchema(BaseModel):
 然后，我们在 `app/api/v1/book.py` 文件中新增一个视图函数 `search_book`:
 
 ```python
-from app.validator.book import BookQuerySearchSchema
 from flask import g
-from lin.apidoc import api
+from lin import NotFound
+from app.api import api
+from app.api.v1.schema import BookQuerySearchSchema
 
 @book_api.route('/search', methods=['GET'])
-# 使用校验，需要引入定义好的对象`api`,它是Spectree的一个实例
+# 使用校验，需要引入定义好的对象`api`,它是Spectree的实例对象
 # query代表来自url中的参数，如`http://127.0.0.1:5000?q=abc&page=1`中的 `q` 和 `page`都属于query参数
 @api.validate(query=BookQuerySearchSchema)
 def search_book():
     # 使用这种方式校验通过的参数将会被挂载到g的对应属性上，方便直接取用。
     q = '%' + g.q + '%' # 取出参数中的`q`参数，加`%`进行模糊查询
-    books = Book.query.filter(Book.title.like(q), Book.delete_time==None).all() # 搜索书籍标题
+    books = Book.query.filter(Book.title.like(q), Book.is_deleted==False).all() # 搜索书籍标题
     if books:
         return books
     raise NotFound('没有找到相关书籍')
@@ -272,7 +265,7 @@ def search_book():
 
 - 创建图书
 
-在 `app/validators/book.py` 文件中*追加*如下内容：
+在 `app/api/v1/schema/__init__.py` 文件中*追加*：
 
 ```python
 class BookSchema(BaseModel):
@@ -285,9 +278,9 @@ class BookSchema(BaseModel):
 在`app/api/v1/book.py`中追加:
 
 ```python
-from app.validator.book import BookSchema
+from app.api.v1.schema import BookSchema
 from flask import request
-from lin.exception import Success
+from lin import Success
 
 
 @book_api.route("", methods=["POST"])
@@ -301,20 +294,33 @@ def create_book():
     return Success(12)
 ```
 
+PS: 这里有一颗糖可以压缩代码:
+
+```python
+
+@book_api.route("", methods=["POST"])
+# 将 json BookSchema放到 视图函数参数的签名中
+# json, query, headers, cookies 参数固定保留，不可更改不可占用
+@api.validate()
+def create_book(json: BookSchema):
+    Book.create(**json.dict(), commit=True)
+    return Success(12)
+```
+
+
 - 更新图书
 
 在`app/api/v1/book.py`中追加:
 
 ```python
 @book_api.route("/<int:id>", methods=["PUT"])
-@api.validate(json=BookSchema)
-def update_book(id: int):
-    book_schema = request.context.json
+@api.validate()
+def update_book(id: int, json: BookSchema):
     book = Book.get(id=id)
     if book:
         book.update(
             id=id,
-            **book_schema.dict(),
+            **json.dict(),
             commit=True,
         )
         return Success(13)
@@ -358,7 +364,7 @@ def get_books():
 
 到此，我们运行了示例的工程项目，并通过 `starter` 完成了一个简单的图书 API 的开发，我们使用了如下几点：
 
-- 使用红图细粒度的创建 API
+- 使用嵌套蓝图细粒度的创建 API
 
 | url             |      description      | method |
 | --------------- | :-------------------: | :----: |

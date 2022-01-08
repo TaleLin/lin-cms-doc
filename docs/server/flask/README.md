@@ -4,7 +4,7 @@ title: 项目结构及开发规范
 
 # <H2Icon /> 项目结构及开发规范
 
-::: warning
+::: tip 
 
 阅读本小节前，请确保你已经完成了[上一节](../../start/flask/README.md)的内容，当然你非常熟
 悉 Flask 的开发也可直接阅读本小节
@@ -19,67 +19,149 @@ title: 项目结构及开发规范
 > 提炼而来的一种规范，它不仅仅是结构，风格还有诸多细节，你会在后续逐渐了解到。
 
 ```bash
-├── LICENSE
-├── README.md
+
 ├── app // 项目主目录
-│   ├── __init__.py
-│   ├── app.py  // 创建Flask app及应用扩展
-│   ├── api // WEB API 模块
-│   │   ├── __init__.py
-│   │   ├── cms // 开发CMS API目录
-│   │   └── v1 // 开发业务 API目录
-│   ├── cli // flask cli 模块
-│   │   ├── __init__.py
-│   │   ├── db // 数据库 cli 模块
-│   │   └── plugin // 插件 cli 模块
-│   ├── config // 配置模块
-│   │   ├── __init__.py
-│   │   ├── base.py // 基础配置类
-│   │   ├── development.py // 开发环境配置类
-│   │   ├── production.py // 生产环境配置类
-│   │   ├── code_message.py // 消息码配置
-│   │   └── http_status_desc // apidoc UI文档http描述
-│   ├── exception //自定义异常模块
-│   │   ├── __init__.py
-│   │   └── api.py // 自定义API异常
-│   ├── extension // 扩展模块
-│   ├── model // 数据模型模块
-│   │   ├── __init__.py
-│   │   ├── lin // Lin-CMS 模型模块
-│   │   └── v1  // 自定义业务模型模块
-│   ├── plugin // 插件模块
-│   ├── util // 工具模块
-│   │   ├── __init__.py
-│   │   ├── common.py // 通用工具功能函数
-│   │   └── page.py // 视图函数分页功能函数
-│   └── validator // 校验验证模块
-│       ├── __init__.py
-│       ├── form.py // WTForms 校验类
-│       └── schema.py  // 数据校验模型类
-├── gunicorn.conf.py // gunicorn 部署配置文件
+│   ├── api // 子应用目录
+│   │   ├── cms // CMS应用目录
+│   │   │   ├── __init__.py  // 这个文件管理CMS应用的蓝图
+│   │   │   ├── admin.py  // CMS的管理模块文件 
+│   │   │   ├── file.py // CMS 的 文件上传模块文件
+│   │   │   ├── log.py // CMS的日志模块文件
+│   │   │   ├── user.py // CMS的用户模块文件
+│   │   │   ├── exception // CMS应用的异常目录
+│   │   │   │   └── __init__.py
+│   │   │   ├── model // CMS的数据库模型目录
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── group_permission.py // 用户组-权限 模型文件
+│   │   │   │   ├── group.py // 用户组 模型文件
+│   │   │   │   ├── permission.py // 权限 模型文件
+│   │   │   │   ├── user_group.py // 用户-用户组 模型文件
+│   │   │   │   ├── user_identity.py //用户-认证 模型文件
+│   │   │   │   └── user.py // 用户 模型
+│   │   │   ├── schema // CMS的pydantic数据校验模型目录
+│   │   │   │   └── __init__.py
+│   │   │   └── validator // CMS的wtforms模型目录
+│   │   │       └── __init__.py
+│   │   ├── __init__.py
+│   │   └── v1 // 样例v1应用的目录
+│   │       ├── book.py // v1的图书目录
+│   │       ├── exception // v1的异常目录
+│   │       │   └── __init__.py
+│   │       ├── __init__.py
+│   │       ├── model // v1的数据库模型目录
+│   │       │   ├── book.py // 图书 模型文件
+│   │       │   └── __init__.py
+│   │       ├── schema // v1的pydantic数据校验模型目录
+│   │       │   └── __init__.py
+│   │       └── validator // v1的wtforms模型目录
+│   │           └── __init__.py
+│   ├── cli // flask 自定义 cli 命令行
+│   │   ├── db // 数据库相关 cli目录
+│   │   │   ├── fake.py
+│   │   │   ├── __init__.py
+│   │   │   └── init.py
+│   │   ├── __init__.py
+│   │   └── plugin // 插件cli目录
+│   │       ├── generator.py
+│   │       ├── __init__.py
+│   │       └── init.py
+│   ├── config // 主配置类目录
+│   │   ├── __init__.py
+│   │   ├── base.py // 基础配置类(被其他配置类继承)
+│   │   ├── code_message.py // 异常码code-message配置
+│   │   ├── development.py // 开发环境配置类
+│   │   └── production.py //生产环境配置类
+│   ├── exception //通用的公共异常目录
+│   │   └── __init__.py
+│   ├── extension // 扩展目录
+│   │   ├── file // 文件上传目录
+│   │   │   ├── config.py
+│   │   │   ├── file.py
+│   │   │   ├── __init__.py
+│   │   │   └── local_uploader.py
+│   │   └── notify // 通知中心扩展目录 
+│   │       ├── __init__.py
+│   │       ├── notify.py
+│   │       ├── socketio.py
+│   │       └── sse.py
+│   ├── __init__.py
+│   ├── model // 通用的数据库模型目录
+│   │   └── __init__.py
+│   ├── plugin //  插件目录
+│   │   ├── oss // OSS插件
+│   │   │   ├── app
+│   │   │   │   ├── controller.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── model.py
+│   │   │   ├── config.py
+│   │   │   ├── info.py
+│   │   │   ├── README.md
+│   │   │   └── requirements.txt
+│   │   ├── poem //poem插件
+│   │   │   ├── app
+│   │   │   │   ├── controller.py
+│   │   │   │   ├── form.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── model.py
+│   │   │   ├── config.py
+│   │   │   ├── info.py
+│   │   │   ├── README.md
+│   │   │   └── requirements.txt
+│   │   └── qiniu // 七牛云插件
+│   │       ├── app
+│   │       │   ├── controller.py
+│   │       │   ├── __init__.py
+│   │       │   └── model.py
+│   │       ├── config.py
+│   │       ├── info.py
+│   │       ├── README.md
+│   │       └── requirements.txt
+│   ├── schema // 通用的pydantic数据校验模型目录
+│   │   └── __init__.py
+│   ├── util // 通用的辅助工具目录
+│   │   ├── captcha.py
+│   │   ├── common.py
+│   │   ├── __init__.py
+│   │   └── page.py
+│   └── validator // 通用的wtforms模型目录
+│       └── __init__.py
 ├── logs // 运行日志
 ├── assets // 静态文件目录
+├── docker-compose.yml // docker-compose 配置文件
+├── docker-deploy.sh // docker-compose 启动执行脚本
+├── Dockerfile // Docker镜像文件
+├── LICENSE
+├── pyproject.toml poetry项目环境描述文件
+├── README.md
+├── gunicorn.conf.py // gunicorn 部署配置文件
 ├── requirements-dev.txt // 开发环境依赖
 ├── requirements-prod.txt // 生产环境依赖
 ├── starter.py // 程序入口文件
 └── tests  // 单元测试目录
+
+
 ```
 
-上面是 starter 项目的整体结构，开发时我们强烈建议你遵循如下规范开发，在前期你肯
-定会不适应，但慢慢地你会爱上它。
-
-- 在 `app/api` 文件夹中开发 API，并将不同版本，不同类型的 API 分开，如：v1 代表
-  第一版本的 API，v2 代表第二版本，cms 代表属于 cms 的 API。
-- 将程序的配置文件放在 `app/config` 文件夹下。配置更详细内容参考[配置](./config.md)
-- 将可重用的类库放在 `app/util` 文件夹下。
-- 将数据模型放在 `app/model` 文件夹下。
-- 将开发的插件放在 `app/plugin` 文件夹下。
-- 将校验类放在 `app/validator` 文件夹下。
-  ...
 
 ## 开发规范
 
+上面是 starter 项目的整体结构，开发时我们强烈建议你遵循如下规范开发，在前期你或许会不适应，但慢慢地你会爱上它。
+
+- 在 `app/api` 文件夹中开发 子应用，并将不同版本，不同类型的 API 分开，如：v1 代表
+  第一版本的 API，v2 代表第二版本，cms 代表属于 cms 的 API。
+- 将程序的配置文件放在 `app/config` 文件夹下。配置更详细内容参考[配置](./config.md)
+- 将可重用的类库放在 `app/util` 文件夹下。
+- 将开发的插件放在 `app/plugin` 文件夹下。
+- 将子应用/蓝图自己的数据、校验模型放在各自的对应目录下，就近管理
+- ...
+
 ### API 规范
+
+::: tip 
+Flask 2.0 之后蓝图可以嵌套，事实上我们不再需要`Redrpint`实现功能，最新版本的`Lin-CMS-Flask`也已使用原生的蓝图机制管理细粒度的API。
+
+当然如果你已经习惯使用红图并满足于它现有的功能，可以继续使用它。
+:::
 
 由于 Flask 本身的灵活性，社区中涌现出了一些便捷开发 Flask Restful API 的框架，其
 中包括 `flask-restful`，`flask-restplus` 等。就 Flask 本身而言，我们觉得它对于
@@ -194,12 +276,15 @@ def handle_error(self, app):
             return e
         if isinstance(e, HTTPException): # 未知的http异常，取信息再以特定的格式返回
             code = e.code
-            msg = e.description
-            error_code = 1007
-            return APIException(msg, code, error_code)
+            message = e.description
+            message_code = 20000
+            return APIException(message_code, message).set_code(code)
         else:
-            if not app.config['DEBUG']:
-                return UnknownException() # 未定义异常，返回未知异常
+            if not app.config["DEBUG"]:
+                import traceback
+
+                app.logger.error(traceback.format_exc()) # 写入运行日志
+                return InternalServerError() # 返回异常
             else:
                 raise e
 ```
@@ -209,6 +294,11 @@ def handle_error(self, app):
 承`APIException`的方式来自定义，这会让前后端的交互更加友好。
 
 ### 数据校验规范
+::: tip 
+当前版本的`Lin-CMS-Flask`依赖`Spectree`和`pydantic`定制了更强大的数据校验机制。甚至可以自动生成OpenAPI在线可测试文档。
+
+如果你已经习惯使用wtforms，可以继续阅读本小节下面部分。
+:::
 
 我们强烈建议你为每个有数据校验的接口定义一个相应的校验类。关于 flask-wtf 的使用
 ，请阅读[官方文档](https://flask-wtf.readthedocs.io/en/stable/)。
@@ -245,16 +335,7 @@ class RegisterForm(Form):
 可以发现，当我们需要校验的参数变得复杂时，一个专注于校验的类可以让我们的代码变得
 更易维护，提升代码整体的可读性。
 
-### 配置规范
 
-在我们的 starter 项目中，统一把项目的配置文件放在了`app/config`文件夹下。当然，
-我们也强烈建议你如此做。不仅如此，由于 Flask 对配置项的限制，你必须保证命名全都
-大写，如`BP_URL_PREFIX`。
-
-```py
-# main config
-BP_URL_PREFIX = '/cms'
-```
 
 ## 小结
 

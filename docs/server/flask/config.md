@@ -42,6 +42,8 @@ title: 配置
 > **Tips:**
 >
 > 比如`FLASK_ENV`指定以`development`环境启动，则读取`app/config/development.py`
+>
+> 由于 Flask 对配置项的限制，你必须保证命名全都大写
 
 默认情况下在此 python 配置文件中继承了我们提供的初始配置，你也可以根据需要覆盖其配置，如:
 
@@ -104,6 +106,6 @@ app = create_app(
 可以通过以下方式获取：
 
 ```python
-from lin.config import global_config
+from lin import global_config
 message = global_config.get("MESSAGE")
 ```

@@ -20,7 +20,7 @@ Lin 的 Server 端是基于 Python Flask 的, 所以你必须首先在自己的 
 
 ### Server 端必备环境
 
-- 安装`Python`环境(version： 3.6+)
+- 安装`Python`环境(version： 3.8+)
 
 ### 获取工程项目
 
@@ -30,7 +30,7 @@ Lin 的 Server 端是基于 Python Flask 的, 所以你必须首先在自己的 
 git clone https://github.com/TaleLin/lin-cms-flask.git starter
 ```
 
-> **Tips:** 
+> **Tips:**
 >
 > 我们以 `starter` 作为工程名，当然您也可以以任意您喜爱的名字作为工程名。
 >
@@ -41,16 +41,20 @@ git clone https://github.com/TaleLin/lin-cms-flask.git starter
 进入项目目录，调用环境中的 pip 来安装依赖包:
 
 ```bash
-pip install -r requirements-${env}.txt
+pip install -r requirements-dev.txt
 ```
+
+> **Tips:**
+>
+> `requirements-dev.txt` 是开发环境的依赖文件;`requirements-prod.txt` 是部署生产使用的依赖文件。
 
 ### 数据库配置
 
-#### 默认使用 Sqlite3
+为了方便快速上手，Lin 默认使用无需额外部署的 `Sqlite3` 数据库。
 
-Lin 默认启用 Sqlite3 数据库，打开项目根目录下的.env 文件(我们提供了开发环境的`.development.env`和生产环境的`.production.env`)，配置其`SQLALCHEMY_DATABASE_URI`
+打开项目根目录下的.env 文件(我们提供了开发环境的`.development.env`和生产环境的`.production.env`)，配置其`SQLALCHEMY_DATABASE_URI`
 
-> Tips: 下面我们用{env}指代配置对应的环境
+> Tips: 后文我们用{env}指代配置 development/production 环境
 
 ```conf
 # 数据库配置示例
@@ -104,7 +108,6 @@ flask run
 点击“心上无垢”，将跳转到`Redoc`页面；点击“林间有风”，跳转到`Swagger`页面。
 
 这证明您已经成功的将服务运行起来了，Congratulations！
-
 
 如果你安装时遇到问题，那么尝试看看[常见问题汇总](../../server/flask/questions.md)，看能否解决，或者去我们的 github 仓库看 issue。如果没有出现你的问题，请给我们提 issue。
 

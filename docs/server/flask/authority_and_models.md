@@ -84,7 +84,7 @@ def delete_book(bid):
 
 刚刚我们谈到扩展模型，事实上扩展 group_model 非常简单。
 
-首先我们在`app/model/lin`下打开`group.py`文件, 然后在`Group`类上追加你想要的字段即可。
+首先我们在`app/api/cms/model/`下打开`group.py`文件, 然后在`Group`类上追加你想要的字段即可。
 
 由于 flask-sqlalchemy 的特性，当数据库中有 lin_user 这张表时，它并不会直接更新这张表。所以为了确保扩展成功，请你在数据库中先删除掉 lin-user 这张表，然后再次运行`flask run` (或者`flask db init --force`强制初始化数据库中所有表)。
 
