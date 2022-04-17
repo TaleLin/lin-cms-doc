@@ -85,7 +85,7 @@ const homeRouter = [
 如果一个 DOM 对应多个 API，比如当前登录的管理员想要修改自己的用户信息，但是没有修改密码的权限，那么编辑按钮显示。如果一个 DOM 对应一个 API，那么直接传入字符串即可。
 
 <img-wrapper>
-  <img src="https://consumerminiaclprd01.blob.core.chinacloudapi.cn/miniappbackground/sfgmember/lin/docs/auth.jpg">
+  <img src=" http://cdn.talelin.com/lin/docs/auth.jpg">
 </img-wrapper>
 
 如果想要 DOM 显示，但只是不能操作状态，我们还提供了这样的指定：
@@ -94,7 +94,7 @@ const homeRouter = [
 <button v-permission="{ permission: '删除图书', type: 'disabled'}">删除</button>
 ```
 <img-wrapper>
-  <img src="https://consumerminiaclprd01.blob.core.chinacloudapi.cn/miniappbackground/sfgmember/lin/docs/auth-disabled.png">
+  <img src=" http://cdn.talelin.com/lin/docs/auth-disabled.png">
 </img-wrapper>
 
 ## API 控制

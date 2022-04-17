@@ -13,7 +13,7 @@ Lin 框架内置了[element-ui 库](http://element-cn.eleme.io/#/zh-CN/component
 如果想渲染一个带操作按键的 table，
 
 <img-wrapper>
-   <img src="https://consumerminiaclprd01.blob.core.chinacloudapi.cn/miniappbackground/sfgmember/lin/docs/lin-table.jpeg"/>
+   <img src=" http://cdn.talelin.com/lin/docs/lin-table.jpeg"/>
 </img-wrapper>
 
 只需要写以下代码即可：
