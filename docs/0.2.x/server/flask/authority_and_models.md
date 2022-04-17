@@ -116,7 +116,7 @@ with app.app_context():
 ```
 
 <img-wrapper>
-  <img src="https://consumerminiaclprd01.blob.core.chinacloudapi.cn/miniappbackground/sfgmember/lin/docs/authority_and_models1.png"/>
+  <img src=" http://cdn.talelin.com/lin/docs/authority_and_models1.png"/>
 </img-wrapper>
 
 到此，我们拿到了访问 API 所必须的令牌，请记住这是超级管理员的令牌，它可以访问一切 API。接下来我们访问改变 postman 的 url 地址为
@@ -174,7 +174,7 @@ Authorization: Bearer ${access_token}
 我们通过 pedro 的账号名、密码登陆获取令牌，并将 header 中的 Authorization 字段换成相应的令牌字段。而后访问`http://127.0.0.1:5000/v1/book/1`，你会得到如下结果：
 
 <img-wrapper>
-  <img src="https://consumerminiaclprd01.blob.core.chinacloudapi.cn/miniappbackground/sfgmember/lin/docs/authority_and_models3.png"/>
+  <img src=" http://cdn.talelin.com/lin/docs/authority_and_models3.png"/>
 </img-wrapper>
 
 现在权限系统已经开始显现它的威能了。它告诉我们，pedro 这个用户未被分配权限组，并没有权限能够访问这个 API。既然没有权限，那我们便分配这个权限给 pedro（请注意，这里分配权限仅为了测试方便，一般的只允许超级管理员分配）。
@@ -199,7 +199,7 @@ with app.app_context():
 运行它后，pedro 用户便被分配到了 id 为 1 的这个权限组。接下来，我们再次访问`http://127.0.0.1:5000/v1/book/1`，结果如下：
 
 <img-wrapper>
-  <img src="https://consumerminiaclprd01.blob.core.chinacloudapi.cn/miniappbackground/sfgmember/lin/docs/authority_and_models4.png">
+  <img src=" http://cdn.talelin.com/lin/docs/authority_and_models4.png">
 </img-wrapper>
 
 如果你也是一样的结果，那么恭喜你，你已经完成了一个权限开发的全部流程，再你后续的开发过程中，都是类似的做法来完成全部的权限管理开发。
@@ -225,7 +225,7 @@ def delete_books():
 我们改变 post 的 url 为`http://127.0.0.1:5000/v1/book/patch`，点击 send 按钮，结果如下，所有的图书已被删除。
 
 <img-wrapper>
-  <img src="https://consumerminiaclprd01.blob.core.chinacloudapi.cn/miniappbackground/sfgmember/lin/docs/authority_and_models5.png"/>
+  <img src=" http://cdn.talelin.com/lin/docs/authority_and_models5.png"/>
 </img-wrapper>
 
 :::warning

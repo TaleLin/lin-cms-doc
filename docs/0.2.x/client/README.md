@@ -17,7 +17,7 @@ PS：约定白底界面部分为 `舞台`。
 除 `舞台` 外，其他模块已经内置在 Lin 中，开发者只需要集中精力在舞台上开发自己的 CMS 业务即可。
 
 <img-wrapper>
-  <img src="https://consumerminiaclprd01.blob.core.chinacloudapi.cn/miniappbackground/sfgmember/lin/lin-cms-ui.png">
+  <img src=" http://cdn.talelin.com/lin/lin-cms-ui.png">
 </img-wrapper>
 
 ## 页面顶部 Header组件
