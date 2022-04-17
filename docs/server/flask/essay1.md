@@ -13,7 +13,7 @@
 在 Lin 中，我们可以通过如下这副图来一窥整体的结构脉络：
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/structure.png"/>
+  <img src="https://cdn.talelin.com/lin/docs/structure.png"/>
 </img-wrapper>
 
 上图的右半部分，是整个 Lin 的系统架构，虚线表示数据流动的过程。可以看到数据从用户流向控制层，转移至检验层、模型层而后流入数据库，再从数据库返回流至视图层最后返回给用户。

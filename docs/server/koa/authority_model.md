@@ -169,7 +169,7 @@ run();
 ```
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/root_login.png"/>
+  <img src="https://cdn.talelin.com/lin/docs/root_login.png"/>
 </img-wrapper>
 
 到此，我们拿到了访问 API 所必须的令牌，请记住这是超级管理员的令牌，它可以访问一
@@ -201,7 +201,7 @@ Authorization: Bearer ${access_token}
 才可访问。
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/permission.png?imageView&thumbnail=2052y1112&type=png&quality=96&stripmeta=0"/>
+  <img src="https://cdn.talelin.com/lin/docs/permission.png?imageView&thumbnail=2052y1112&type=png&quality=96&stripmeta=0"/>
 </img-wrapper>
 
 如果你顺利得到了结果，你可能不明白这些数据究竟代表着什么。这没关系，我们会一一说
@@ -263,7 +263,7 @@ bookApi.linDelete(
 成相应的令牌字段。而后访问`http://127.0.0.1:5000/v1/book/1`，你会得到如下结果：
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/delete_book_forbidden.png"/>
+  <img src="https://cdn.talelin.com/lin/docs/delete_book_forbidden.png"/>
 </img-wrapper>
 
 现在权限系统已经开始显现它的威能了。它告诉我们，pedro 这个用户未被分配权限组，并
@@ -312,7 +312,7 @@ run();
 。接下来，我们再次访问`http://127.0.0.1:5000/v1/book/1`，结果如下：
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/delete_book_success.png">
+  <img src="https://cdn.talelin.com/lin/docs/delete_book_success.png">
 </img-wrapper>
 
 如果你也是一样的结果，那么恭喜你，你已经完成了一个权限开发的全部流程，再你后续的
