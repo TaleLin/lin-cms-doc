@@ -38,7 +38,7 @@ title: 前端快速上手
 PS: 如果对Lin的[目录结构](../../client/catalog.md)不是非常清楚，可以先进行大致浏览。
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/book.png">
+  <img src="https://cdn.talelin.com/lin/docs/book.png">
 </img-wrapper>
 
 ## 页面路由
@@ -87,13 +87,13 @@ export default bookRouter
 位置： `src/config/stage/index.js`
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/book10.png">
+  <img src="https://cdn.talelin.com/lin/docs/book10.png">
 </img-wrapper>
 
 到这里，已经可以看到图书管理的菜单和页面了。
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/book8.png">
+  <img src="https://cdn.talelin.com/lin/docs/book8.png">
 </img-wrapper>
 
 ## 获取数据
@@ -149,7 +149,7 @@ export default new Book()
 这样通过数据的变更来改变视图，图书列表就可以渲染出来了：
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/book9.png">
+  <img src="https://cdn.talelin.com/lin/docs/book9.png">
 </img-wrapper>
 
 ## 异常处理
@@ -188,7 +188,7 @@ export default {
 auths 的数据结构是一个一维数组：
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/book2.png">
+  <img src="https://cdn.talelin.com/lin/docs/book2.png">
 </img-wrapper>
 
 在路由配置文件中添加属性 `right` ：
@@ -211,8 +211,8 @@ const bookRouter = {
 那么如果当前登录的管理员没有 `图书管理` 权限，则不显示菜单，有权限则显示：
 
 <!-- <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/book3.png" style="display:inline-block;height:215px;">
-  <img src=" http://cdn.talelin.com/lin/docs/book4.png" style="display:inline-block;height:215px">
+  <img src="https://cdn.talelin.com/lin/docs/book3.png" style="display:inline-block;height:215px;">
+  <img src="https://cdn.talelin.com/lin/docs/book4.png" style="display:inline-block;height:215px">
 </img-wrapper> -->
 
 <!-- 同样的，api 级别的控制，我们也提供了相应的指令：
@@ -225,8 +225,8 @@ const bookRouter = {
 如果当前登录的管理员没有 `删除图书` 权限，则不显示该 DOM，有权限则显示：
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/book5.png" style="display:inline-block;height:215px;margin-right:10px">
-  <img src=" http://cdn.talelin.com/lin/docs/book6.png" style="display:inline-block;height:215px">
+  <img src="https://cdn.talelin.com/lin/docs/book5.png" style="display:inline-block;height:215px;margin-right:10px">
+  <img src="https://cdn.talelin.com/lin/docs/book6.png" style="display:inline-block;height:215px">
 </img-wrapper> -->
 
 <RightMenu />

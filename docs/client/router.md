@@ -17,7 +17,7 @@ Lin CMS 路由数据的配置目录为: `src/config/stage/`，其中 `index.js` 
 筛除掉所有的父级路由，将所有的最终子路由打平，这些最终导入到 `vue-router` 中的路由都可以在 `舞台` 展示出对应的页面。
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/route.png">
+  <img src="https://cdn.talelin.com/lin/docs/route.png">
 </img-wrapper> 
 
 ## 左侧菜单
@@ -27,7 +27,7 @@ Lin CMS 路由数据的配置目录为: `src/config/stage/`，其中 `index.js` 
 将数据根据权限筛选，得到当前登录用户有权限的路由数据，根据最终过滤后的数据渲染左侧菜单。数据可以在 vuex 的 getter 中看到，key是 `sidebarList`。
 
 <img-wrapper>
-  <img src=" http://cdn.talelin.com/lin/docs/route2.png">
+  <img src="https://cdn.talelin.com/lin/docs/route2.png">
 </img-wrapper> 
 
 <!-- 
