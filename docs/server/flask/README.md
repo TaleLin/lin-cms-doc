@@ -75,15 +75,9 @@ title: 项目结构及开发规范
 │   │   └── __init__.py
 │   ├── extension // 扩展目录
 │   │   ├── file // 文件上传目录
-│   │   │   ├── config.py
 │   │   │   ├── file.py
 │   │   │   ├── __init__.py
 │   │   │   └── local_uploader.py
-│   │   └── notify // 通知中心扩展目录 
-│   │       ├── __init__.py
-│   │       ├── notify.py
-│   │       ├── socketio.py
-│   │       └── sse.py
 │   ├── __init__.py
 │   ├── model // 通用的数据库模型目录
 │   │   └── __init__.py
@@ -131,11 +125,12 @@ title: 项目结构及开发规范
 ├── docker-deploy.sh // docker-compose 启动执行脚本
 ├── Dockerfile // Docker镜像文件
 ├── LICENSE
-├── pyproject.toml poetry项目环境描述文件
+├── pyproject.toml 项目与依赖描述文件（uv 管理）
+├── migrations/ 数据库迁移脚本（Flask-Migrate/Alembic，必须提交）
 ├── README.md
 ├── gunicorn.conf.py // gunicorn 部署配置文件
-├── requirements-dev.txt // 开发环境依赖
-├── requirements-prod.txt // 生产环境依赖
+├── requirements.txt // 由 uv.lock 导出的部署依赖（Docker 用）
+├── uv.lock // 依赖锁定文件
 ├── starter.py // 程序入口文件
 └── tests  // 单元测试目录
 

@@ -7,6 +7,20 @@ title: flask日志
 最新版本 `0.3.0-alpha`   
 
 ## 主工程
+### 0.7.0
+#### Features
+- 迁移：集成 Flask-Migrate（Alembic），schema 全部由迁移管理；`flask db init` 保持旧语义且幂等，新增 `--force` 重建；种子数据以数据迁移内置
+- 会话：新增 `POST /cms/user/logout`（jti 黑名单吊销）；修改/重置密码吊销该用户全部令牌（token_version）；refresh_token 有效期显式化为 7 天
+- 安全：认证接口限流（登录/刷新 20 次/分钟，验证码 30 次/分钟，注册 10 次/小时）；CORS 白名单（开发默认放行 localhost:5173）；生产屏蔽 /apidoc 与演示路由
+- 日志：请求日志敏感字段自动脱敏（password/token 等）；LOG.LEVEL 配置真实生效
+- 密码：哈希算法显式固化为 scrypt；密码策略保持 6-22 位（无复杂度强制）
+- 质量：mypy 全量类型检查（check_untyped_defs）、flake8/black/isort 四门禁 + GitHub Actions CI（含迁移漂移检查 flask db check）；测试 69 项
+- 部署：Dockerfile 非 root 运行 + .dockerignore；docker-deploy.sh 幂等化；gunicorn 加固（timeout/max_requests/日志）
+- 工具链：包管理切换为 uv；`.*.env` 移出版本控制并提供 .env.example 模板
+#### ⚠ BREAKING CHANGES
+- SECRET_KEY 必填：未设置或仍为模板占位符时拒绝启动
+- 启动不再自动建表：改模型需 `flask db migrate && flask db upgrade`；存量库需一次性 `flask db stamp head`（并补 `lin_user.token_version` 列）
+- 生产 CORS 默认仅同源：跨域部署必须配置 CORS_ORIGINS
 ### 0.3.0-alpha
 #### Features
 - 权限: 支持多分组

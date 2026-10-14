@@ -581,8 +581,10 @@
 | username         |   true   |      无 |  用户名  |
 | email            |  false   |      无 |   邮箱   |
 | group_ids        |  false   |      无 | 分组 id  |
-| password         |   true   |      无 |   密码   |
+| password         |   true   |      无 |   密码（6-22 位）   |
 | confirm_password |   true   |      无 | 确认密码 |
+
+> **密码策略**：长度 6-22 位，无复杂度强制；两次输入必须一致。未传 `group_ids` 时默认落入 Guest 分组。
 
 ```json
 {
@@ -697,6 +699,8 @@
 }
 ```
 
+**注意：修改密码成功后，该用户所有已签发的令牌（access_token 与 refresh_token）立即失效，全部登录端需重新登录。**
+
 ### refreshToken 刷新令牌
 
 `url: cms/user/refresh`
@@ -713,6 +717,31 @@
   "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZGVudGl0eSI6MSwic2NvcGUiOiJsaW4iLCJ0eXBlIjoicmVmcmVzaCIsImV4cCI6MTU3OTQ4ODYxMH0.wu_dHpzd2mxlxqJF8L_6qBmr-FujGrDLAc2iJmZNT6M"
 }
 ```
+
+### logout 退出登录
+
+`url: cms/user/logout`
+
+`method: post`（Authorization 中携带 access_token）
+
+`body:`
+
+| name | required | default | 含义 |
+| -------- | :------: | ------: | :----: |
+| refresh_token |  false  |      无 | 需一并吊销的 refresh_token |
+
+`result:`
+
+```json
+{
+  "code": 0,
+  "message": "退出成功",
+  "request": "POST  /cms/user/logout"
+}
+```
+
+调用后当前 access_token 立即失效（按 jti 记入黑名单）；若 body 携带 refresh_token 则一并吊销。
+此外，**修改密码或管理员重置密码会使该用户全部已签发令牌（含 refresh_token）立即失效**。
 
 ### getPermissions 查询自己拥有的权限
 

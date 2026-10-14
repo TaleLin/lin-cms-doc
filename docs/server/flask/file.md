@@ -16,14 +16,14 @@ lin 提供的文件上传系统，已经封装好了上述比较棘手耗时的�
 我们把 lin 的文件上传接口定到了`cms/file/`这个路径上，你可以通过 post 方法上传文件。lin 默认的文件上传实现`LocalUploader`这个类，意思是前端上传的文件会保存到服务器本地，但更多的时候我们需要将文件保存到云服务器上，如阿里云或腾讯云，lin 并没有局限在此，你可以自己实现存储文件的逻辑，将文件保存到你希望的地方。
 
 对于文件上传(`file`)这种可以有多种实现方式的功能，我们把其诸多实现归入
-到`app/extensions/file`这个目录下。如`local_uploader.py`这个文件实现了上传到本地
-的`LocalUploader`类，`config.py`文件是与其相关的配置文件。
+到`app/extension/file`这个目录下。如`local_uploader.py`这个文件实现了上传到本地
+的`LocalUploader`类；上传相关的`FILE`配置位于`app/config/base.py`（未自定义时框架自动注入）。
 
 ```bash
-app/extensions/
+app/extension/
 └── file
-    ├── config.py  # 配置文件
-    └── local_uploader.py # LocalUploader类实现文件
+    ├── file.py           # File 数据模型
+    └── local_uploader.py # LocalUploader 类实现文件
 ```
 
 默认的情况下在，`cms/file/`这个接口使用`LocalUploader`这个文件上传实现类。
@@ -62,14 +62,16 @@ class LocalUploader(Uploader):
 
 ```python
 FILE = {
-    "STORE_DIR": 'app/assets',       # 文件的存储路径
-    "SINGLE_LIMIT": 1024 * 1024 * 2, # 单个文件的大小限制，默认2M
-    "TOTAL_LIMIT": 1024 * 1024 * 20, # 所有文件的大小限制，默认20M
-    "NUMS": 10,                      # 文件数量限制，默认10
-    "INCLUDE": [],                   # 文件后缀名的排除项，默认排除[]，即允许所有类型的文件上传
-    "EXCLUDE": []                    # 文件后缀名的包括项
+    "STORE_DIR": "assets",             # 文件的存储路径
+    "SINGLE_LIMIT": 1024 * 1024 * 2,   # 单个文件的大小限制，默认 2M
+    "TOTAL_LIMIT": 1024 * 1024 * 20,   # 所有文件的大小限制，默认 20M
+    "NUMS": 10,                        # 文件数量限制，默认 10
+    "INCLUDE": {"jpg", "png", "jpeg"}, # 扩展名白名单（默认仅图片）
+    "EXCLUDE": set(),                  # 扩展名黑名单（与 INCLUDE 同时设置时白名单优先）
 }
 ```
+
+该配置位于 `app/config/base.py`，未自定义时框架会以 `app.config.setdefault` 自动注入，**无需手动加载**。
 
 :::tip
 
@@ -84,19 +86,7 @@ uploader = LocalUploader(files, config={'NUMS': 2, 'SINGLE_LIMIT': 1024 * 1024 *
 在单个配置的后面，笔者已经以注释的方式解释了每项的作用。当然还需要着重解释一下`exclude`和`include`
 这两项，默认情况下，只会读取它们中的一项，如果两项皆为空列表的话，所有的文件类型都会被允许上传，如果二者都不是空列表则取`include`为有效配置，总而言之，系统只会支持使用一项。
 
-注意了！！！在`app/extensions/`下的配置文件，系统不会帮我们做自动加载，不同于
-`app/config`。因此，你必须在`app/app.py`的`create_app`方法中，显示的加载该配置文件
-
-```py
-## 手动加载配置文件
-def create_app(register_all=True):
-    app = Flask(__name__, static_folder='./assets')
-    app.config.from_object('app.config.setting')
-    app.config.from_object('app.config.secure')
-    # 加载其他配置文件：
-    app.config.from_object('app.extensions.file.config')
-    ...
-```
+上传成功后返回的 `url` 拼接规则：优先使用配置的 `SITE_DOMAIN`；未配置时按**当前请求的 Host** 拼接（反向代理后也能得到正确外链）。
 
 当做好了这些后，我们使用 postman 测试一下文件上传。
 

@@ -15,7 +15,7 @@ title: 常见问题汇总
 在\*nix 平台平台，你可以使用如下命令安装依赖：
 
 ```bash
-pip install -r requirements-prod.txt
+uv sync（开发）或 pip install -r requirements.txt（部署，文件由 uv.lock 导出）
 ```
 
 使用 gunicorn 运行项目

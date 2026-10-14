@@ -78,7 +78,7 @@ def register_blueprints(app):
 现在，我们已经可以通过 HTTP 请求到该 API 了，运行服务:
 
 ```bash
-flask run
+uv run flask run
 ```
 
 > **Tips:** 在请求测试接口时，请确认服务处于正常运行状态，后面不再赘述。

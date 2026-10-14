@@ -20,7 +20,8 @@ Lin 的 Server 端是基于 Python Flask 的, 所以你必须首先在自己的 
 
 ### Server 端必备环境
 
-- 安装`Python`环境(version： 3.8+)
+- 安装`Python`环境(version： 3.11+)
+- 安装 [uv](https://docs.astral.sh/uv/) 包管理器（项目已切换到 uv，所有命令通过 `uv run` 执行）
 
 ### 获取工程项目
 
@@ -38,15 +39,17 @@ git clone https://github.com/TaleLin/lin-cms-flask.git starter
 
 ### 安装依赖包
 
-进入项目目录，调用环境中的 pip 来安装依赖包:
+进入项目目录，先准备环境变量文件，再安装依赖包:
 
 ```bash
-pip install -r requirements-dev.txt
+cp .env.example .development.env   # 必做：复制模板并填入 SECRET_KEY（缺失或占位符会拒绝启动）
+uv sync --extra dev                # 安装项目 + 开发工具链
 ```
 
 > **Tips:**
 >
-> `requirements-dev.txt` 是开发环境的依赖文件;`requirements-prod.txt` 是部署生产使用的依赖文件。
+> `SECRET_KEY` 生成方式：`python -c 'import secrets; print(secrets.token_hex(32))'`。
+> `.*.env` 文件已被 .gitignore 忽略，不会进入仓库；Docker 部署使用从 uv.lock 导出的 `requirements.txt`。
 
 ### 数据库配置
 
@@ -88,7 +91,7 @@ SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@localhost:3306/lincms'
 
 如果您是第一次使用 **`Lin-CMS`**，需要初始化数据库。
 
-请先进入项目根目录，然后执行`flask db init`,用来添加超级管理员 root(默认密码 123456), 以及新建其他必要的分组
+请先进入项目根目录，然后执行`uv run flask db init`。数据库结构由 Flask-Migrate 管理，此命令幂等地完成建表并写入种子数据：超级管理员 root(默认密码 123456)、Root/Guest 分组、权限同步
 
 > **Tips:**
 > 如果您需要一些业务样例数据，可以执行脚本`flask db fake`添加它
@@ -98,7 +101,7 @@ SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@localhost:3306/lincms'
 一切就绪后，再次从命令行中执行
 
 ```bash
-flask run
+uv run flask run
 ```
 
 如果一切顺利，您将在命令行中看到项目成功运行的信息。如果您没有修改代码，Lin 将默认在本地启动一个端口号为 5000 的端口用来监听请求。此时，我们访问`http://localhost:5000`，将看到一组字符：

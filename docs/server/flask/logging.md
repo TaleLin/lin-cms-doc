@@ -26,7 +26,7 @@ LOG = {
 
 在上面的代码中，我们已经给出了每一项配置对应的注释。下面我们来详细介绍每一项配置：
 
-- LEVEL 为日志级别，当该配置项为 DEBUG 时，日志会记录客户端的请求参数，当该配置项为 INFO 时，日志不会记录客户端的详细参数。
+- LEVEL 为日志级别，当该配置项为 DEBUG 时，日志会记录客户端的请求参数，当该配置项为 INFO 时，日志不会记录客户端的详细参数。**注意：请求参数中的敏感字段（password、old_password、new_password、confirm_password、access_token、refresh_token、token、secret 等）会被自动脱敏为 `***`，明文密码不会落盘。**
 - DIR 为日志存放目录名称，采用文件的形式来记录日志，默认存放在项目根目录的`logs`目录下
 - SIZE_LIMIT 为日志切分大小，在当天的日志文件大小达到切分标准时，会对日志进行切分，旧的日志以 `yyyy-mm-dd-hh-mm-ss.log` 的形式命名。而新的日志继续以 `yyyy-mm-dd.log` 命名。
 - REQUEST_LOG 配置项为一个布尔值，表示是否开启`请求日志`，请求日志即客户端发起 request 请求的时候，会记录详细的信息，如客户端请求了管理员登录接口，日志文件中就会记录如下配置：
@@ -34,7 +34,7 @@ LOG = {
 ```bash
 2019-06-16 21:19:51,879 DEBUG 63566   ---  [Thread-2] - [POST] -> [/cms/user/login] from:127.0.0.1 costs:149.200 ms data:{
 	param: {},   # url parameters
-	body: {'username': 'super', 'password': '123456'}  # body parameters
+	body: {'username': 'super', 'password': '***'}  # body parameters
 }
 ```
 

@@ -24,7 +24,7 @@ title: 令牌
 - access_token ：用来用户鉴权，控制用户对接口，资源的访问。access_token 十分重要，它是服务器对前端有力控制的唯一途径，故一般其生存周期十分短，一般在 2 个小时左右，更有甚者，其生命周期只有 15 分钟，在 Lin 中默认 1 个小时。
 
 - refresh_token ：用户通过登陆后获得 access_token，而 access_token 的生命周期十分短暂，但是用户登陆太频繁会严重影响体验，因此需要一种免登陆便能获取
-  access_token 的方式。refresh_token 主要用来解决该问题，refresh_token 的生命周期较长，一般为 30 天左右，但 refresh_token 不能被用来用户身份鉴权和获取资源，它只能被用来重新获取 access_token。当前端发现 access_token 过期时，便应通过 refresh_token 重新获取 access_token。
+  access_token 的方式。refresh_token 主要用来解决该问题，refresh_token 的生命周期较长，但 refresh_token 不能被用来用户身份鉴权和获取资源，它只能被用来重新获取 access_token。当前端发现 access_token 过期时，便应通过 refresh_token 重新获取 access_token。在 Lin 中 refresh_token 默认有效期为 **7 天**（可通过 `JWT_REFRESH_TOKEN_EXPIRES` 配置）。
 
 ## 项目中的使用
 
@@ -91,3 +91,58 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzU1MzMyNjMsIm5iZiI6MTUz
 当然在 Lin 的前端框架中，已经默认实现了以上机制，你大可不必自己去实现，当然如果你想深入了解，也可在阅读本小节后自行尝试。
 
 :::
+
+## 会话撤销（吊销）
+
+旧版本中令牌一经签发只能等自然过期，无法主动作废。当前版本提供两级撤销机制：
+
+### 1. 令牌级吊销：退出登录
+
+`path`: /cms/user/logout
+
+`method`: post（需在 Authorization 中携带 access_token）
+
+`参数`（可选 body）:
+
+| name | 说明 | 类型 |
+| -------- | :----: | :----: |
+| refresh_token | 需要一并吊销的 refresh_token | string |
+
+调用后：
+
+- 当前 access_token 立即失效（按 jti 记入 `lin_token_blocklist` 表，随其自然过期自动清理）
+- 若 body 携带 refresh_token，则该 refresh_token 一并吊销
+
+### 2. 用户级全吊销：修改/重置密码
+
+`lin_user` 表中的 `token_version`（令牌版本号）参与令牌校验：
+
+- 用户修改自己的密码（`PUT /cms/user/change_password`）或管理员重置密码（`PUT /cms/admin/user/{id}/password`）时，该版本号 +1
+- 该用户名下**所有已签发的 access_token 与 refresh_token 立即失效**，下次请求返回 401，前端应引导重新登录
+
+### 有效期与错误码
+
+| 项 | 值 |
+|---|---|
+| access_token 有效期 | 默认 1 小时（`JWT_ACCESS_TOKEN_EXPIRES`） |
+| refresh_token 有效期 | 默认 7 天（`JWT_REFRESH_TOKEN_EXPIRES`） |
+| 密码哈希算法 | scrypt（显式固化，随库升级不漂移） |
+
+认证相关业务码（响应体 `code` 字段）：
+
+| code | 含义 |
+|---|---|
+| 10010 | 未认证 / 令牌被吊销 / 改密后令牌版本失效 |
+| 10040 | 令牌无效（TokenInvalid） |
+| 10041 | 令牌损坏 |
+| 10050 | refresh token 过期 |
+| 10051 | access token 过期 |
+| 10052 | 令牌刷新失败 |
+
+:::tip
+
+前端对 `10010` 的处理建议：普通请求收到时先尝试用 refresh_token 静默续期；
+若 refresh 请求自身返回 10010/10052，说明会话已被吊销（改密或登出），应清理本地凭证并跳转登录页。
+
+:::
+
